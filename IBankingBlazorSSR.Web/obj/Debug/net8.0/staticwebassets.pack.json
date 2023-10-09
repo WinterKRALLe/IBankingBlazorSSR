@@ -5,20 +5,108 @@
       "PackagePath": "staticwebassets/IBankingBlazorSSR.Web.bundle.scp.css"
     },
     {
-      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/app.css",
-      "PackagePath": "staticwebassets/app.css"
-    },
-    {
-      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/bootstrap/bootstrap.min.css",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
-    },
-    {
-      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/bootstrap/bootstrap.min.css.map",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/css/app.css",
+      "PackagePath": "staticwebassets/css/app.css"
     },
     {
       "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/favicon.png",
       "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/Montserrat-Italic-VariableFont_wght.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/Montserrat-Italic-VariableFont_wght.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/Montserrat-VariableFont_wght.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/Montserrat-VariableFont_wght.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/OFL.txt",
+      "PackagePath": "staticwebassets/font/Montserrat/OFL.txt"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/README.txt",
+      "PackagePath": "staticwebassets/font/Montserrat/README.txt"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-Black.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-Black.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-BlackItalic.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-BlackItalic.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-Bold.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-Bold.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-BoldItalic.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-BoldItalic.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-ExtraBold.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-ExtraBold.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-ExtraBoldItalic.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-ExtraBoldItalic.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-ExtraLight.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-ExtraLight.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-ExtraLightItalic.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-ExtraLightItalic.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-Italic.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-Italic.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-Light.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-Light.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-LightItalic.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-LightItalic.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-Medium.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-Medium.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-MediumItalic.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-MediumItalic.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-Regular.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-Regular.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-SemiBold.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-SemiBold.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-SemiBoldItalic.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-SemiBoldItalic.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-Thin.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-Thin.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/font/Montserrat/static/Montserrat-ThinItalic.ttf",
+      "PackagePath": "staticwebassets/font/Montserrat/static/Montserrat-ThinItalic.ttf"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/images/cat_leaves.png",
+      "PackagePath": "staticwebassets/images/cat_leaves.png"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/images/logo.png",
+      "PackagePath": "staticwebassets/images/logo.png"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.IBankingBlazorSSR.Web.Microsoft.AspNetCore.StaticWebAssets.props",

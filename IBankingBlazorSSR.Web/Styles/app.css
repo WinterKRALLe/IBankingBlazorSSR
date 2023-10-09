@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url("/font/Montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");
+}
+
+@layer base {
+    html {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+    }
+
+    :root {
+        --color-base: #1a1a21;
+        --color-base2: #1a1a21;
+        --color-muted: #f8f8f6;
+        --color-inverted: #e5e4e1;
+        --color-fill: #ffffff;
+        --color-fill-accent: #ffffff;
+        --color-button-accent: #6d4aff;
+        --color-button-accent-hover: #6243e6;
+        --color-button-muted: #f3f3f3;
+        /* CSS HEX */
+        --picton-blue: #40B8FDff;
+        --ultra-pink: #FF52FFff;
+        --black: #000000ff;
+        --papaya-whip: #FEEBCAff;
+        --veronica: #883FFAff;
+
+        /* CSS HSL */
+        --picton-blue: hsla(202, 98%, 62%, 1);
+        --ultra-pink: hsla(300, 100%, 66%, 1);
+        --black: hsla(0, 0%, 0%, 1);
+        --papaya-whip: hsla(38, 96%, 89%, 1);
+        --veronica: hsla(263, 95%, 61%, 1);
+
+        --gra: linear-gradient(to top, var(--color-button-accent), var(--ultra-pink));
+        --gra1: linear-gradient(to top, var(--picton-blue), var(--papaya-whip));
+    }
+
+    .theme-classic {
+        --color-base: #f1f2f3;
+        --color-base2: #32363f;
+        --color-muted: #f8f8f6;
+        --color-inverted: #e5e4e1;
+        --color-fill: #ffffff;
+        --color-fill-accent: #1c223d;
+        --color-button-accent: #6d4aff;
+        --color-button-accent-hover: #6243e6;
+        --color-button-muted: #282f4d;
+    }
+
+    .theme-monokai {
+        --color-base: #f1f1f1;
+        --color-base2: #8f92a6;
+        --color-muted: #1a1926;
+        --color-inverted: #25283a;
+        --color-text-accent: #2fd6b5;
+        --color-fill: #16141c;
+        --color-fill-accent: #16141c;
+        --color-button-accent: #e53265;
+        --color-button-accent-hover: #e84774;
+        --color-button-muted: #2a2635;
+    }
+
+    .theme-ebony {
+        --color-base: #f0f0f0;
+        --color-base2: #c0c0c1;
+        --color-muted: #000000;
+        --color-inverted: #2c2934;
+        --color-fill: #0e0d12;
+        --color-fill-accent: #000000;
+        --color-button-accent: #0073ff;
+        --color-button-accent-hover: #1a81ff;
+        --color-button-muted: #363440;
+    }
+}
+
+.gradient {
+    background: var(--gra);
+}
+
+.rounded-custom {
+    border-radius: 0% 100% 0% 100% / 0% 0% 100% 100%;
+}
