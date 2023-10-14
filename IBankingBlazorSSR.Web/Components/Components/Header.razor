@@ -1,0 +1,110 @@
+@attribute [RenderModeInteractiveServer]
+
+<header class=" sticky top-0 bg-skin-fill z-20 py-2 pt-2 h-24 w-full">
+    <nav class="flex items-center justify-between md:px-6 px-2">
+        <a href="/" class="w-20 h-auto">
+            <img src="/images/logo.png" alt="logo">
+        </a>
+        <ul class="flex items-center md:gap-16 gap-8">
+            <li>
+                <div class="hidden lg:flex items-center pl-1 bg-skin-muted rounded-lg">
+                    <svg class="fill-skin-base p-1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                        <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+                    </svg>
+                    <input type="text" autocomplete="off" name="search" class="focus:outline-none text-md mx-2 w-full bg-transparent">
+                </div>
+            </li>
+            <li>
+                <button class="flex items-center gap-4 font-semibold">
+                    <svg class="fill-skin-base" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                        <path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"></path>
+                    </svg>
+                    <span class="hidden md:block">Oznámení</span>
+                </button>
+            </li>
+            <li>
+                <button class="flex items-center gap-4 font-semibold text-red-500">
+                    <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                        <path d="M120,128V48a8,8,0,0,1,16,0v80a8,8,0,0,1-16,0Zm60.37-78.7a8,8,0,0,0-8.74,13.4C194.74,77.77,208,101.57,208,128a80,80,0,0,1-160,0c0-26.43,13.26-50.23,36.37-65.3a8,8,0,0,0-8.74-13.4C47.9,67.38,32,96.06,32,128a96,96,0,0,0,192,0C224,96.06,208.1,67.38,180.37,49.3Z"></path>
+                    </svg>
+                    <span class="hidden md:block">Odhlásit</span>
+                </button>
+            </li>
+            <li>
+                <button
+                    class="w-10 h-9 lg:hidden flex justify-center items-center rounded-md transition-all hover:bg-light hover:bg-opacity-10 duration-150"
+                    @onclick="ToggleMenu">
+                    <div class="flex flex-col justify-center gap-1">
+                        <div class="flex justify-center">
+                            <span
+                                class="block w-1 h-[3px] bg-skin-base rounded-l-md">
+                            </span>
+                            <span class="block w-1 h-[3px] bg-transparent"></span>
+                            <span
+                                class="block w-5 h-[3px] bg-skin-base rounded-r-md">
+                            </span>
+                        </div>
+                        <div class="flex justify-center">
+                            <span class="block w-5 h-[3px] bg-skin-base rounded-md"></span>
+                        </div>
+                        <div class="flex justify-end">
+                            <span
+                                class="block w-1 h-[3px] bg-skin-base rounded-l-md">
+                            </span>
+                            <span class="block w-1 h-[3px] bg-transparent"></span>
+                            <span
+                                class="block w-[10px] h-[3px] bg-skin-base rounded-r-md">
+                            </span>
+                        </div>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="flex lg:hidden items-center pl-1 w-11/12 mx-auto sm:w-2/3 bg-skin-muted rounded-lg">
+        <svg class="fill-skin-base p-1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+            <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+        </svg>
+        <input type="text" autocomplete="off" name="search" class="focus:outline-none text-md mx-2 w-full bg-transparent">
+    </div>
+
+    <div class="fixed top-0 bottom-0 right-0 w-full max-w-sm transition-all @menuVisibleClass duration-500 flex flex-col z-20 bg-skin-fill_accent">
+        <div class="flex justify-end mr-4 my-3 mt-8">
+            <button
+                class="w-10 h-10 flex justify-center items-center hover:bg-black hover:bg-opacity-10 transition-all duration-150 rounded-md" @onclick="ToggleMenu">
+                <span class="absolute w-7 h-[3px] rounded-md rotate-45 bg-skin-base"></span>
+                <span class="absolute w-7 h-[3px] rounded-md -rotate-45 bg-skin-base"></span>
+            </button>
+        </div>
+        <div class="px-4 flex justify-center">
+            <SideNav/>
+        </div>
+    </div>
+
+
+    @*   <script> *@
+    @*     function toggleTheme() { *@
+    @*         const htmlElement = document.documentElement; *@
+    @*         if (htmlElement.classList.contains('theme-monokai')) { *@
+    @*             htmlElement.classList.remove('theme-monokai'); *@
+    @*             localStorage.setItem('theme', 'light'); // Store the preference *@
+    @*         } else { *@
+    @*             htmlElement.classList.add('theme-monokai'); *@
+    @*             localStorage.setItem('theme', 'monokai'); // Store the preference *@
+    @*         } *@
+    @*     } *@
+    @* </script> *@
+</header>
+
+@code {
+    private bool _menuVisible = false;
+    private string menuVisibleClass => _menuVisible ? "translate-x-0" : "translate-x-full";
+
+    private void ToggleMenu()
+    {
+        _menuVisible = !_menuVisible;
+    }
+
+}

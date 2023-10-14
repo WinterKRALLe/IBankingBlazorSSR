@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XVzCVfrWkx5LWybJCEjpyPLWEEyypAOixKdjcD/gNmk=",
+  "Hash": "qM/A4sy+ccUeZazHLdcikxrzSWCNQgjNBDDs04vuCXc=",
   "Source": "IBankingBlazorSSR.Web",
   "BasePath": "_content/IBankingBlazorSSR.Web",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/app.css"
+    },
+    {
+      "Identity": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/css/default.css",
+      "SourceId": "IBankingBlazorSSR.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/",
+      "BasePath": "_content/IBankingBlazorSSR.Web",
+      "RelativePath": "css/default.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/default.css"
     },
     {
       "Identity": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/favicon.png",
@@ -547,6 +566,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/logo.png"
+    },
+    {
+      "Identity": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/images/stars.png",
+      "SourceId": "IBankingBlazorSSR.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/",
+      "BasePath": "_content/IBankingBlazorSSR.Web",
+      "RelativePath": "images/stars.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/stars.png"
+    },
+    {
+      "Identity": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/js/theme.js",
+      "SourceId": "IBankingBlazorSSR.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/",
+      "BasePath": "_content/IBankingBlazorSSR.Web",
+      "RelativePath": "js/theme.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/theme.js"
     }
   ]
 }

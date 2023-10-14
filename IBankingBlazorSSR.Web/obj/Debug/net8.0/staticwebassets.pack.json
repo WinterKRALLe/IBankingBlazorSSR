@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets/css/app.css"
     },
     {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/css/default.css",
+      "PackagePath": "staticwebassets/css/default.css"
+    },
+    {
       "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/favicon.png",
       "PackagePath": "staticwebassets/favicon.png"
     },
@@ -107,6 +111,14 @@
     {
       "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/images/logo.png",
       "PackagePath": "staticwebassets/images/logo.png"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/images/stars.png",
+      "PackagePath": "staticwebassets/images/stars.png"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/js/theme.js",
+      "PackagePath": "staticwebassets/js/theme.js"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.IBankingBlazorSSR.Web.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -1,0 +1,35 @@
+<div class="pt-5 pb-7 px-6 rounded-xl grow max-w-sm mx-auto sm:mx-0 bg-skin-muted whitespace-nowrap">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            @Svg
+            <span>@AccountType</span>
+        </div>
+        <span class="tracking-wider">@AccountNum</span>
+    </div>
+    <div class="flex items-center justify-between mt-6 gap-4">
+        <div class="flex relative">
+            <span class="mr-2">@Currency</span>
+            <span class="text-3xl font-bold tracking-wider">@Amount</span>
+        </div>
+        <div class="absolute mt-10 after:left-0 after:right-0 ml-3 w-48 h-px bg-skin-button_accent"></div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public string AccountType { get; set; } = String.Empty;
+    
+    [Parameter]
+    public string AccountNum { get; set; } = String.Empty;
+
+    [Parameter]
+    public string Currency { get; set; } = String.Empty;
+
+    [Parameter]
+    public string Amount { get; set; } = String.Empty;
+    
+    [Parameter]
+    public MarkupString Svg { get; set; }
+    
+}
