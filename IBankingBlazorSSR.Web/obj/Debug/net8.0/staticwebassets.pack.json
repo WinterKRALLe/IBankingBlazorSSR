@@ -117,6 +117,10 @@
       "PackagePath": "staticwebassets/images/stars.png"
     },
     {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/js/tabs.js",
+      "PackagePath": "staticwebassets/js/tabs.js"
+    },
+    {
       "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/js/theme.js",
       "PackagePath": "staticwebassets/js/theme.js"
     },

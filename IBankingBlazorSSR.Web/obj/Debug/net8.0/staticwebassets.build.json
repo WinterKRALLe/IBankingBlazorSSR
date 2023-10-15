@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qM/A4sy+ccUeZazHLdcikxrzSWCNQgjNBDDs04vuCXc=",
+  "Hash": "h1ItHetBRA9cvoH0YjXNkF1NO5Ck/j1EV1aIFGSLp6w=",
   "Source": "IBankingBlazorSSR.Web",
   "BasePath": "_content/IBankingBlazorSSR.Web",
   "Mode": "Default",
@@ -585,6 +585,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/stars.png"
+    },
+    {
+      "Identity": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/js/tabs.js",
+      "SourceId": "IBankingBlazorSSR.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/",
+      "BasePath": "_content/IBankingBlazorSSR.Web",
+      "RelativePath": "js/tabs.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/tabs.js"
     },
     {
       "Identity": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/js/theme.js",
