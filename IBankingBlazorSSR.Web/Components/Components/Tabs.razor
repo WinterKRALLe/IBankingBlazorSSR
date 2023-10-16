@@ -3,17 +3,17 @@
         <div 
           role="tablist"
           aria-label="tabs"
-          class="lg:flex gap-10 text-skin-base2 hidden relative w-max mx-auto h-12 grid grid-cols-3 items-center px-[3px] rounded-full bg-gray-900/20 overflow-hidden shadow-2xl shadow-900/20 transition">
-          <div class="absolute indicator h-11 my-auto top-0 bottom-0 left-0 rounded-full bg-white shadow-md"></div>
+          class="lg:flex gap-10 hidden relative w-full rounded-lg bg-skin-muted h-12 items-center overflow-hidden transition p-1">
+          <div class="absolute indicator h-10 my-auto top-0 bottom-0 left-0 border-b-2 border-gray-400"></div>
           <button
             role="tab"
             aria-selected="true"
             aria-controls="panel-1"
             id="tab-1"
             tabindex="0"
-            class="relative block h-10 px-6 tab rounded-full"
+            class="relative block h-10 px-6 tab rounded-full text-skin-base transition"
           >
-            <span class="text-skin-base">Účty</span>
+            <span class="">Účty</span>
           </button>
           <button
             role="tab"
@@ -21,9 +21,9 @@
             aria-controls="panel-2"
             id="tab-2"
             tabindex="-1"
-            class="relative block h-10 px-6 tab rounded-full"
+            class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition"
           >
-            <span class="text-skin-base">Transakce</span>
+            <span class="tab-text ">Transakce</span>
           </button>
           <button
             role="tab"
@@ -31,12 +31,12 @@
             aria-controls="panel-3"
             id="tab-3"
             tabindex="-1"
-            class="relative block h-10 px-6 tab rounded-full"
+            class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition"
           >
-            <span class="text-skin-base">Akce</span>
+            <span>Akce</span>
           </button>
         </div>
-        <div class="mt-6 relative rounded-3xl bg-purple-50">
+        <div class="mt-6 relative rounded-3xl bg-skin-fill">
           <div
             role="tabpanel"
             id="panel-1"
@@ -194,33 +194,7 @@
     
 </ul>
 <script>
-    window.initializeTabs = function() {
-        let tabs = document.querySelectorAll(".tab");
-        let indicator = document.querySelector(".indicator");
-        let panels = document.querySelectorAll(".tab-panel");
-
-        indicator.style.width = tabs[0].getBoundingClientRect().width + 'px';
-        indicator.style.left = tabs[0].getBoundingClientRect().left - tabs[0].parentElement.getBoundingClientRect().left + 'px';
-
-        tabs.forEach(tab => {
-            tab.addEventListener("click", () => {
-                let tabTarget = tab.getAttribute("aria-controls");
-
-                indicator.style.width = tab.getBoundingClientRect().width + 'px';
-                indicator.style.left = tab.getBoundingClientRect().left - tab.parentElement.getBoundingClientRect().left + 'px';
-
-                panels.forEach(panel => {
-                    let panelId = panel.getAttribute("id");
-                    if (tabTarget === panelId) {
-                        panel.classList.remove("invisible", "opacity-0");
-                        panel.classList.add("visible", "opacity-100");
-                    } else {
-                        panel.classList.add("invisible", "opacity-0");
-                    }
-                });
-            });
-        });
-    };
+ 
 </script>
 
 @code {
