@@ -1,5 +1,7 @@
-﻿<!DOCTYPE html>
-<html lang="en" class="theme-monokai bg-skin-fill text-skin-base">
+﻿@inject IJSRuntime JSRuntime;
+
+<!DOCTYPE html>
+<html lang="en" class="bg-skin-fill text-skin-base">
 
 <head>
     <meta charset="utf-8"/>
@@ -14,7 +16,22 @@
 <body class="w-full overflow-x-hidden max-w-screen-2xl h-screen mx-auto flex flex-col relative">
 <Routes/>
 <script src="_framework/blazor.web.js"></script>
+<script src="js/theme.js"></script>
 <script src="js/tabs.js"></script>
 </body>
 
 </html>
+
+@code {
+    private bool isJavaScriptInitialized = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !isJavaScriptInitialized)
+        {
+            isJavaScriptInitialized = true;
+
+            await JSRuntime.InvokeVoidAsync("detectAndApplyTheme");
+        }
+    }
+}

@@ -1,4 +1,4 @@
-function detectAndApplyTheme() {
+window.detectAndApplyTheme = function() {
     const storedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -10,6 +10,3 @@ function detectAndApplyTheme() {
         document.documentElement.classList.remove('theme-monokai');
     }
 }
-
-// Register the function for JavaScript Interop
-window.detectAndApplyTheme = detectAndApplyTheme;

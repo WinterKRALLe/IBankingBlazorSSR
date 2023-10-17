@@ -1,201 +1,182 @@
 @inject IJSRuntime JSRuntime;
 
-        <div 
-          role="tablist"
-          aria-label="tabs"
-          class="lg:flex gap-10 hidden relative w-full rounded-lg bg-skin-muted h-12 items-center overflow-hidden transition p-1">
-          <div class="absolute indicator h-10 my-auto top-0 bottom-0 left-0 border-b-2 border-gray-400"></div>
-          <button
-            role="tab"
-            aria-selected="true"
-            aria-controls="panel-1"
-            id="tab-1"
-            tabindex="0"
-            class="relative block h-10 px-6 tab rounded-full text-skin-base transition"
-          >
-            <span class="">Účty</span>
-          </button>
-          <button
-            role="tab"
-            aria-selected="false"
-            aria-controls="panel-2"
-            id="tab-2"
-            tabindex="-1"
-            class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition"
-          >
-            <span class="tab-text ">Transakce</span>
-          </button>
-          <button
-            role="tab"
-            aria-selected="false"
-            aria-controls="panel-3"
-            id="tab-3"
-            tabindex="-1"
-            class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition"
-          >
-            <span>Akce</span>
-          </button>
+<div
+    role="tablist"
+    aria-label="tabs"
+    class="flex lg:gap-10 relative w-full rounded-lg bg-skin-muted h-12 justify-around md:justify-start items-center overflow-hidden transition p-1">
+    <div class="absolute indicator h-10 my-auto top-0 bottom-0 left-0 border-b-2 border-gray-400"></div>
+    <button
+        role="tab"
+        aria-selected="true"
+        aria-controls="panel-1"
+        id="tab-1"
+        tabindex="0"
+        class="relative block h-10 px-6 tab rounded-full text-skin-base transition">
+        <span class="">Účty</span>
+    </button>
+    <button
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-2"
+        id="tab-2"
+        tabindex="-1"
+        class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition">
+        <span class="tab-text ">Transakce</span>
+    </button>
+    <button
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-3"
+        id="tab-3"
+        tabindex="-1"
+        class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition">
+        <span>Akce</span>
+    </button>
+</div>
+<div class="mt-6 relative rounded-3xl bg-skin-fill">
+    <div
+        role="tabpanel"
+        id="panel-1"
+        class="tab-panel flex flex-col gap-y-12 transition duration-300">
+        <div class="flex gap-10 ml-1 mt-4 flex-wrap">
+                <Account
+                    AccountType="Osobní účet"
+                    Currency="CZK"
+                    Amount="333 333"
+                    Svg=@(new MarkupString("<svg class=\"fill-skin-base\" xmlns=\"http://www.w3.org/2000/svg\" width=\"26\" height=\"26\" fill=\"#000000\" viewBox=\"0 0 256 256\"><path d=\"M216,40H40A16,16,0,0,0,24,56V192a16,16,0,0,0,16,16H56v16a8,8,0,0,0,16,0V208H184v16a8,8,0,0,0,16,0V208h16a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,152H40V56H216v64H199.32a48,48,0,1,0,0,16H216v56Zm-50.16-72a16,16,0,1,0,0,16H183a32,32,0,1,1,0-16Z\"></path></svg>"))
+                    AccountNum="885 518 342"/>
+                <Account
+                    AccountType="Spořicí účet"
+                    Currency="CZK"
+                    Amount="999 999"
+                    Svg=@(new MarkupString("<svg class=\"fill-skin-base\" xmlns=\"http://www.w3.org/2000/svg\" width=\"26\" height=\"26\" fill=\"#000000\" viewBox=\"0 0 256 256\"><path d=\"M192,116a12,12,0,1,1-12-12A12,12,0,0,1,192,116ZM152,64H112a8,8,0,0,0,0,16h40a8,8,0,0,0,0-16Zm96,48v32a24,24,0,0,1-24,24h-2.36l-16.21,45.38A16,16,0,0,1,190.36,224H177.64a16,16,0,0,1-15.07-10.62L160.65,208h-57.3l-1.92,5.38A16,16,0,0,1,86.36,224H73.64a16,16,0,0,1-15.07-10.62L46,178.22a87.69,87.69,0,0,1-21.44-48.38A16,16,0,0,0,16,144a8,8,0,0,1-16,0,32,32,0,0,1,24.28-31A88.12,88.12,0,0,1,112,32H216a8,8,0,0,1,0,16H194.61a87.93,87.93,0,0,1,30.17,37c.43,1,.85,2,1.25,3A24,24,0,0,1,248,112Zm-16,0a8,8,0,0,0-8-8h-3.66a8,8,0,0,1-7.64-5.6A71.9,71.9,0,0,0,144,48H112A72,72,0,0,0,58.91,168.64a8,8,0,0,1,1.64,2.71L73.64,208H86.36l3.82-10.69A8,8,0,0,1,97.71,192h68.58a8,8,0,0,1,7.53,5.31L177.64,208h12.72l18.11-50.69A8,8,0,0,1,216,152h8a8,8,0,0,0,8-8Z\"></path></svg>"))
+                    AccountNum="709 111 173"/>
         </div>
-        <div class="mt-6 relative rounded-3xl bg-skin-fill">
-          <div
-            role="tabpanel"
-            id="panel-1"
-            class="tab-panel flex flex-col gap-y-12 w-ful transition duration-300"
-          >
-                    <div class="flex gap-10 ml-1 mt-4 flex-wrap">
-                        <Account
-                            AccountType="Osobní účet"
-                            Currency="CZK"
-                            Amount="333 333"
-                            Svg=@(new MarkupString("<svg class=\"fill-skin-base\" xmlns=\"http://www.w3.org/2000/svg\" width=\"26\" height=\"26\" fill=\"#000000\" viewBox=\"0 0 256 256\"><path d=\"M216,40H40A16,16,0,0,0,24,56V192a16,16,0,0,0,16,16H56v16a8,8,0,0,0,16,0V208H184v16a8,8,0,0,0,16,0V208h16a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,152H40V56H216v64H199.32a48,48,0,1,0,0,16H216v56Zm-50.16-72a16,16,0,1,0,0,16H183a32,32,0,1,1,0-16Z\"></path></svg>"))
-                            AccountNum="885 518 342"/>
-            
-                        <Account
-                            AccountType="Spořicí účet"
-                            Currency="CZK"
-                            Amount="999 999"
-                            Svg=@(new MarkupString("<svg class=\"fill-skin-base\" xmlns=\"http://www.w3.org/2000/svg\" width=\"26\" height=\"26\" fill=\"#000000\" viewBox=\"0 0 256 256\"><path d=\"M192,116a12,12,0,1,1-12-12A12,12,0,0,1,192,116ZM152,64H112a8,8,0,0,0,0,16h40a8,8,0,0,0,0-16Zm96,48v32a24,24,0,0,1-24,24h-2.36l-16.21,45.38A16,16,0,0,1,190.36,224H177.64a16,16,0,0,1-15.07-10.62L160.65,208h-57.3l-1.92,5.38A16,16,0,0,1,86.36,224H73.64a16,16,0,0,1-15.07-10.62L46,178.22a87.69,87.69,0,0,1-21.44-48.38A16,16,0,0,0,16,144a8,8,0,0,1-16,0,32,32,0,0,1,24.28-31A88.12,88.12,0,0,1,112,32H216a8,8,0,0,1,0,16H194.61a87.93,87.93,0,0,1,30.17,37c.43,1,.85,2,1.25,3A24,24,0,0,1,248,112Zm-16,0a8,8,0,0,0-8-8h-3.66a8,8,0,0,1-7.64-5.6A71.9,71.9,0,0,0,144,48H112A72,72,0,0,0,58.91,168.64a8,8,0,0,1,1.64,2.71L73.64,208H86.36l3.82-10.69A8,8,0,0,1,97.71,192h68.58a8,8,0,0,1,7.53,5.31L177.64,208h12.72l18.11-50.69A8,8,0,0,1,216,152h8a8,8,0,0,0,8-8Z\"></path></svg>"))
-                            AccountNum="709 111 173"/>
-                    </div>
-                    <div>
-                        <div class="text-lg">Moje karty</div>
-                        <div class="flex gap-10 ml-1 mt-4 flex-wrap grow">
-                            <Card
-                                State=true
-                                CardNumber="1234 4321 1234 4321"
-                                Expiration="10 / 25"
-                                Cvv="001"
-                                CardHolder="Jindřich Caletka"/>
-                            <Card
-                                State=true
-                                CardNumber="1234 4321 1234 4321"
-                                Expiration="10 / 25"
-                                Cvv="001"
-                                CardHolder="Jindřich Caletka"/>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="text-lg">Čekající platby</div>
-                        <div class="ml-1 mt-4">
-                            <div class="overflow-auto rounded-lg shadow hidden md:block">
-                                <table class="w-full">
-                                    <thead class="bg-skin-muted border-b-2 border-gray-200">
-                                    <tr>
-                                        <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">No.</th>
-                                        <th class="p-3 text-sm font-semibold tracking-wide text-left">Details</th>
-                                        <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Date</th>
-                                        <th class="w-32 p-3 text-sm font-semibold tracking-wide text-left">Total</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-gray-100">
-                                    <tr class="">
-                                        <td class="p-3 text-sm whitespace-nowrap">
-                                            <a href="#" class="font-bold text-blue-500 hover:underline">10001</a>
-                                        </td>
-                                        <td class="p-3 text-sm whitespace-nowrap">
-                                            something
-                                        </td>
-            
-                                        <td class="p-3 text-sm whitespace-nowrap">16/10/2021</td>
-                                        <td class="p-3 text-sm whitespace-nowrap">$200.00</td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="p-3 text-sm whitespace-nowrap">
-                                            <a href="#" class="font-bold text-blue-500 hover:underline">10002</a>
-                                        </td>
-                                        <td class="p-3 text-sm whitespace-nowrap">something</td>
-            
-                                        <td class="p-3 text-sm whitespace-nowrap">16/10/2021</td>
-                                        <td class="p-3 text-sm whitespace-nowrap">$200.00</td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="p-3 text-sm whitespace-nowrap">
-                                            <a href="#" class="font-bold text-blue-500 hover:underline">10002</a>
-                                        </td>
-                                        <td class="p-3 text-sm whitespace-nowrap">something</td>
-                                        <td class="p-3 text-sm whitespace-nowrap">16/10/2021</td>
-                                        <td class="p-3 text-sm whitespace-nowrap">$200.00</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
-                                <div class="space-y-3 p-4 rounded-lg shadow">
-                                    <div class="flex items-center space-x-2 text-sm">
-                                        <div>
-                                            <a href="#" class="text-blue-500 font-bold hover:underline">#1000</a>
-                                        </div>
-                                        <div class="">10/10/2021</div>
-                                    </div>
-                                    <div class="text-sm">
-                                        something
-                                    </div>
-                                    <div class="text-sm font-medium">
-                                        $200.00
-                                    </div>
-                                </div>
-                                <div class="space-y-3 p-4 rounded-lg shadow">
-                                    <div class="flex items-center space-x-2 text-sm">
-                                        <div>
-                                            <a href="#" class="text-blue-500 font-bold hover:underline">#1001</a>
-                                        </div>
-                                        <div class="">10/10/2021</div>
-                                    </div>
-                                    <div class="text-sm">
-                                        something
-                                    </div>
-                                    <div class="text-sm font-medium">
-                                        $200.00
-                                    </div>
-                                </div>
-                                <div class="space-y-3 p-4 rounded-lg shadow">
-                                    <div class="flex items-center space-x-2 text-sm">
-                                        <div>
-                                            <a href="#" class="text-blue-500 font-bold hover:underline">#1002</a>
-                                        </div>
-                                        <div class="">10/10/2021</div>
-            
-                                    </div>
-                                    <div class="text-sm">
-                                        something
-                                    </div>
-                                    <div class="text-sm font-medium">
-                                        $200.00
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-          </div>
-          <div
-            role="tabpanel"
-            id="panel-2"
-            class="absolute top-0 invisible opacity-0 tab-panel p-6 transition duration-300"
-          >
-            <h2 class="text-xl font-semibold text-gray-800">Second tab panel</h2>
-            <p class="mt-4 text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas dolores voluptate temporibus, atque ab eos, delectus at ad hic voluptatem veritatis iure, nulla voluptates quod nobis doloremque eaque! Perferendis, soluta.</p>
-          </div>
-          <div
-            role="tabpanel"
-            id="panel-3"
-            class="absolute top-0 invisible opacity-0 tab-panel p-6 transition duration-300"
-          >
-            <h2 class="text-xl font-semibold text-gray-800">Third tab panel</h2>
-            <p class="mt-4 text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas dolores voluptate temporibus, atque ab eos, delectus at ad hic voluptatem veritatis iure, nulla voluptates quod nobis doloremque eaque! Perferendis, soluta.</p>
-          </div>
+        <div>
+            <div class="text-lg">Moje karty</div>
+            <div class="flex gap-10 ml-1 mt-4 flex-wrap grow">
+                <Card
+                    State=true
+                    CardNumber="1234 4321 1234 4321"
+                    Expiration="10 / 25"
+                    Cvv="001"
+                    CardHolder="Jindřich Caletka"/>
+                <Card
+                    State=true
+                    CardNumber="1234 4321 1234 4321"
+                    Expiration="10 / 25"
+                    Cvv="001"
+                    CardHolder="Jindřich Caletka"/>
+            </div>
         </div>
+        <div>
+            <div class="text-lg">Čekající platby</div>
+            <div class="ml-1 mt-4">
+                <div class="overflow-auto rounded-lg shadow hidden md:block">
+                    <table class="w-full">
+                        <thead class="bg-skin-muted border-b-2 border-gray-200">
+                        <tr>
+                            <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">No.</th>
+                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Details</th>
+                            <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Date</th>
+                            <th class="w-32 p-3 text-sm font-semibold tracking-wide text-left">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                        <tr class="">
+                            <td class="p-3 text-sm whitespace-nowrap">
+                                <a href="#" class="font-bold text-blue-500 hover:underline">10001</a>
+                            </td>
+                            <td class="p-3 text-sm whitespace-nowrap">
+                                something
+                            </td>
 
-@* <ul class="lg:flex gap-10 text-skin-base2 hidden"> *@
-@*     <li>Účty</li> *@
-@*     <li>Transakce</li> *@
-@*     <li>Akce</li> *@
-@* </ul> *@
-<ul class="flex">
-    
-</ul>
-<script>
- 
-</script>
+                            <td class="p-3 text-sm whitespace-nowrap">16/10/2021</td>
+                            <td class="p-3 text-sm whitespace-nowrap">$200.00</td>
+                        </tr>
+                        <tr class="">
+                            <td class="p-3 text-sm whitespace-nowrap">
+                                <a href="#" class="font-bold text-blue-500 hover:underline">10002</a>
+                            </td>
+                            <td class="p-3 text-sm whitespace-nowrap">something</td>
+
+                            <td class="p-3 text-sm whitespace-nowrap">16/10/2021</td>
+                            <td class="p-3 text-sm whitespace-nowrap">$200.00</td>
+                        </tr>
+                        <tr class="">
+                            <td class="p-3 text-sm whitespace-nowrap">
+                                <a href="#" class="font-bold text-blue-500 hover:underline">10002</a>
+                            </td>
+                            <td class="p-3 text-sm whitespace-nowrap">something</td>
+                            <td class="p-3 text-sm whitespace-nowrap">16/10/2021</td>
+                            <td class="p-3 text-sm whitespace-nowrap">$200.00</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+                    <div class="space-y-3 p-4 rounded-lg shadow">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <div>
+                                <a href="#" class="text-blue-500 font-bold hover:underline">#1000</a>
+                            </div>
+                            <div class="">10/10/2021</div>
+                        </div>
+                        <div class="text-sm">
+                            something
+                        </div>
+                        <div class="text-sm font-medium">
+                            $200.00
+                        </div>
+                    </div>
+                    <div class="space-y-3 p-4 rounded-lg shadow">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <div>
+                                <a href="#" class="text-blue-500 font-bold hover:underline">#1001</a>
+                            </div>
+                            <div class="">10/10/2021</div>
+                        </div>
+                        <div class="text-sm">
+                            something
+                        </div>
+                        <div class="text-sm font-medium">
+                            $200.00
+                        </div>
+                    </div>
+                    <div class="space-y-3 p-4 rounded-lg shadow">
+                        <div class="flex items-center space-x-2 text-sm">
+                            <div>
+                                <a href="#" class="text-blue-500 font-bold hover:underline">#1002</a>
+                            </div>
+                            <div class="">10/10/2021</div>
+
+                        </div>
+                        <div class="text-sm">
+                            something
+                        </div>
+                        <div class="text-sm font-medium">
+                            $200.00
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+        role="tabpanel"
+        id="panel-2"
+        class="absolute top-0 invisible opacity-0 tab-panel p-6 transition duration-300">
+        <h2 class="text-xl font-semibold text-gray-800">Second tab panel</h2>
+        <p class="mt-4 text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas dolores voluptate temporibus, atque ab eos, delectus at ad hic voluptatem veritatis iure, nulla voluptates quod nobis doloremque eaque! Perferendis, soluta.</p>
+    </div>
+    <div
+        role="tabpanel"
+        id="panel-3"
+        class="absolute top-0 invisible opacity-0 tab-panel p-6 transition duration-300">
+        <h2 class="text-xl font-semibold text-gray-800">Third tab panel</h2>
+        <p class="mt-4 text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas dolores voluptate temporibus, atque ab eos, delectus at ad hic voluptatem veritatis iure, nulla voluptates quod nobis doloremque eaque! Perferendis, soluta.</p>
+    </div>
+</div>
 
 @code {
     private bool isJavaScriptInitialized = false;
@@ -209,4 +190,5 @@
             await JSRuntime.InvokeVoidAsync("initializeTabs");
         }
     }
+
 }
