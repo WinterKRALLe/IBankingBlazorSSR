@@ -1,0 +1,159 @@
+@page "/Settings"
+
+@attribute [RenderModeInteractiveServer]
+
+@inject IJSRuntime JSRuntime;
+
+<div
+    role="tablist"
+    aria-label="tabs"
+    class="flex lg:gap-10 relative w-full rounded-lg bg-skin-muted h-12 justify-around md:justify-start items-center overflow-hidden transition p-1">
+    <div class="absolute indicator h-10 my-auto top-0 bottom-0 left-0 border-b-2 border-gray-400"></div>
+    <button
+        role="tab"
+        aria-selected="true"
+        aria-controls="panel-1"
+        id="tab-1"
+        tabindex="0"
+        class="relative block h-10 px-6 tab rounded-full text-skin-base transition">
+        <span class="">Osobní údaje</span>
+    </button>
+    <button
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-2"
+        id="tab-2"
+        tabindex="-1"
+        class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition">
+        <span class="tab-text ">Zabezpečení</span>
+    </button>
+</div>
+<div class="mt-6 relative rounded-3xl bg-skin-fill">
+    <div
+        role="tabpanel"
+        id="panel-1"
+        class="tab-panel flex flex-col transition duration-300 ">
+        <form class="w-fit flex flex-col flex-wrap justify-center lg:justify-start bg-skin-muted p-4">
+        <div class="flex flex-wrap md:gap-8 justify-center lg:justify-start">
+            <label
+                for="Username"
+                class="relative mt-6 block rounded-md border border-gray-200 shadow-sm focus-within:border-pink-600 focus-within:ring-1 focus-within:ring-pink-600">
+                <input
+                    type="text"
+                    id="Username"
+                    class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-4"
+                    placeholder="Username"
+                    value=""/>
+                <span
+                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-skin-fill p-0.5 text-xs text-white transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                    Jméno
+                </span>
+            </label>
+            <label
+                for="Lastname"
+                class="relative mt-6 block rounded-md border border-gray-200 shadow-sm focus-within:border-pink-600 focus-within:ring-1 focus-within:ring-pink-600">
+                <input
+                    type="text"
+                    id="Lastname"
+                    class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-4"
+                    placeholder="Lastname"
+                    value=""/>
+                <span
+                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-skin-fill p-0.5 text-xs text-white transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                    Příjmení
+                </span>
+            </label>
+        </div>
+        <div class="flex flex-wrap md:gap-8 justify-center lg:justify-start">
+            <label
+                for="Phone"
+                class="relative mt-6 block rounded-md border border-gray-200 shadow-sm focus-within:border-pink-600 focus-within:ring-1 focus-within:ring-pink-600">
+                <input
+                    type="tel"
+                    id="Phone"
+                    class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-4"
+                    placeholder="Lastname"
+                    value=""/>
+                <span
+                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-skin-fill p-0.5 text-xs text-white transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                    Telefon
+                </span>
+            </label>
+            <label
+                for="Email"
+                class="relative mt-6 block rounded-md border border-gray-200 shadow-sm focus-within:border-pink-600 focus-within:ring-1 focus-within:ring-pink-600">
+                <input
+                    type="email"
+                    id="Email"
+                    class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-4"
+                    placeholder="Lastname"
+                    value=""/>
+                <span
+                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-skin-fill p-0.5 text-xs text-white transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                    Email
+                </span>
+            </label>
+        </div>
+        <div class="flex flex-wrap md:gap-8 justify-center lg:justify-start">
+            <label
+                for="DateOfBirth"
+                class="relative mt-6 block rounded-md border border-gray-200 shadow-sm focus-within:border-pink-600 focus-within:ring-1 focus-within:ring-pink-600">
+                <input
+                    type="text"
+                    id="DateOfBirth"
+                    class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-4"
+                    placeholder="Datum narození"
+                    value=""/>
+                <span
+                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-skin-fill p-0.5 text-xs text-white transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                    Datum narození
+                </span>
+            </label>
+            <label
+                for="Address"
+                class="relative mt-6 block rounded-md border border-gray-200 shadow-sm focus-within:border-pink-600 focus-within:ring-1 focus-within:ring-pink-600">
+                <input
+                    type="text"
+                    id="Address"
+                    class="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 p-4"
+                    placeholder="Adresa bydliště"
+                    value=""/>
+                <span
+                    class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-skin-fill p-0.5 text-xs text-white transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                    Adresa bydliště
+                </span>
+            </label>
+        </div>
+        <div class="flex justify-end">
+            <button type="submit" class="w-full mt-8 flex justify-center items-center gap-2 border border-gray-200 p-3 rounded-md hover:bg-skin-button_muted focus:bg-skin-button_muted">
+                <svg class="fill-green-500" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
+                    <path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+                </svg>
+                <span>Potvrdit změny</span>
+            </button>
+        </div>
+    </form>
+
+</div>
+<div
+    role="tabpanel"
+    id="panel-2"
+    class="absolute top-0 invisible opacity-0 tab-panel transition duration-300">
+    <h2>Zabezpečení</h2>
+</div>
+</div>
+
+@code {
+    private bool isJavaScriptInitialized;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !isJavaScriptInitialized)
+        {
+            isJavaScriptInitialized = true;
+
+            await JSRuntime.InvokeVoidAsync("initializeTabs");
+        }
+    }
+
+}

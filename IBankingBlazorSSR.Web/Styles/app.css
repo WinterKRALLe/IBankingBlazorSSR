@@ -80,7 +80,7 @@
 }
 
 .gradient {
-    background: var(--gra);
+    background: linear-gradient(to left, #ea8d8d, #a890fe);
 }
 
 .rounded-custom {
