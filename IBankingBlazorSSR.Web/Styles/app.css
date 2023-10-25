@@ -65,6 +65,19 @@
         --color-button-accent-hover: #e84774;
         --color-button-muted: #2a2635;
     }
+    
+    .theme-forest {
+        --color-base: #e1e2e6;
+        --color-base2: #4a4b4f;
+        --color-muted: #1d1e22;
+        --color-inverted: #28292d;
+        --color-text-accent: #2fd6b5;
+        --color-fill: #1d1e22;
+        --color-fill-accent: #28292d;
+        --color-button-accent: #d3f886;
+        --color-button-accent-hover: #e84774;
+        --color-button-muted: #d4e8e6;
+    }
 
     .theme-ebony {
         --color-base: #f0f0f0;
@@ -79,8 +92,12 @@
     }
 }
 
-.gradient {
+.gradient1 {
     background: linear-gradient(to left, #ea8d8d, #a890fe);
+}
+
+.gradient2 {
+    background: linear-gradient(to right, #0Eb9bb, #F1322D);
 }
 
 .rounded-custom {
