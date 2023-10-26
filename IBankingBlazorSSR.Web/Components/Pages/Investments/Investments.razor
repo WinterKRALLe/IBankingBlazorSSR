@@ -3,7 +3,7 @@
 
 <h3>Blazor Widget</h3>
 
-<div class="widget">
+<div class="widget bg-red-500 w-screen h-full">
     <header>
         @foreach (var (tab, index) in tabHeaders.Select((value, i) => (value, i)))
         {
@@ -28,7 +28,7 @@
 <style>
     :root {
       --color-primary: #5644fd;
-      --tab-width: 300px;
+      --tab-width: 100%;
       --button-width: 64px;
     }
     
@@ -53,7 +53,7 @@
     
     .widget {
       background: #ffffff;
-      width: var(--tab-width);
+      width: 100%;
       border-radius: 8px;
     }
     
@@ -66,7 +66,7 @@
     .widget > header > button {
       padding: 20px;
       font-size: 15px;
-      width: var(--button-width);
+      width: 120px;
       cursor: pointer;
       background: transparent;
       color: #918db7;

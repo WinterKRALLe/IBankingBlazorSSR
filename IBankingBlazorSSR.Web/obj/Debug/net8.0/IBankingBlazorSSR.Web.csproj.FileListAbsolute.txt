@@ -19,10 +19,7 @@
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.IBankingBlazorSSR.Web.props
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.IBankingBlazorSSR.Web.props
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/staticwebassets.pack.json
-/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/Components/Layout/MainLayout.razor.rz.scp.css
-/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/Components/Layout/NavMenu.razor.rz.scp.css
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/bundle/IBankingBlazorSSR.Web.styles.css
-/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/projectbundle/IBankingBlazorSSR.Web.bundle.scp.css
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/IBankingBlazorSSR.Web.dll
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/refint/IBankingBlazorSSR.Web.dll
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/IBankingBlazorSSR.Web.pdb

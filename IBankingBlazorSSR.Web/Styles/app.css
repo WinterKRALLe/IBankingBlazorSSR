@@ -73,7 +73,7 @@
         --color-inverted: #28292d;
         --color-text-accent: #2fd6b5;
         --color-fill: #1d1e22;
-        --color-fill-accent: #28292d;
+        --color-fill-accent: #ffffff;
         --color-button-accent: #d3f886;
         --color-button-accent-hover: #e84774;
         --color-button-muted: #d4e8e6;
@@ -102,4 +102,14 @@
 
 .rounded-custom {
     border-radius: 0% 100% 0% 100% / 0% 0% 100% 100%;
+}
+.radial {
+    background-image:
+            radial-gradient(at 8% 85%, hsla(110,97%,72%,1) 0px, transparent 50%),
+            radial-gradient(at 70% 7%, hsla(25,68%,70%,1) 0px, transparent 50%),
+            radial-gradient(at 1% 25%, hsla(155,60%,73%,1) 0px, transparent 50%),
+            radial-gradient(at 85% 52%, hsla(269,63%,61%,1) 0px, transparent 50%),
+            radial-gradient(at 86% 32%, hsla(212,70%,65%,1) 0px, transparent 50%),
+            radial-gradient(at 29% 6%, hsla(144,69%,72%,1) 0px, transparent 50%),
+            radial-gradient(at 61% 25%, hsla(111,71%,68%,1) 0px, transparent 50%);
 }

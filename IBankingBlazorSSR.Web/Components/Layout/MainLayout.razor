@@ -1,20 +1,11 @@
 ﻿@inherits LayoutComponentBase
 
-
-@* <Header /> *@
-
-
-<div class="flex flex-wrap items-start gap-12">
-    <aside class="hidden lg:block sticky top-24 w-min h-min">
+<div class="h-full w-full flex flex-col bg-skin-fill">
+    <Header/>
+    <div class="flex grow">
         <SideNav/>
-    </aside>
-    <main role="main" class="flex flex-col flex-1 mx-4 lg:m-0">
-        @Body
-    </main>
-</div>
-
-<div id="blazor-error-ui" class="hidden">
-    An unhandled error has occurred.
-    <a href="" class="reload">Reload</a>
-    <a class="dismiss">🗙</a>
+        <main role="main" class="bg-skin-fill_accent rounded-xl w-full lg:mr-4 lg:mb-4 mb-20 lg:p-4 py-4">
+            @Body
+        </main>
+    </div>
 </div>

@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/projectbundle/IBankingBlazorSSR.Web.bundle.scp.css",
-      "PackagePath": "staticwebassets/IBankingBlazorSSR.Web.bundle.scp.css"
-    },
-    {
       "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/css/app.css",
       "PackagePath": "staticwebassets/css/app.css"
     },
