@@ -23,22 +23,6 @@
         --color-button-accent: #6d4aff;
         --color-button-accent-hover: #6243e6;
         --color-button-muted: #f3f3f3;
-        /* CSS HEX */
-        --picton-blue: #40B8FDff;
-        --ultra-pink: #FF52FFff;
-        --black: #000000ff;
-        --papaya-whip: #FEEBCAff;
-        --veronica: #883FFAff;
-
-        /* CSS HSL */
-        --picton-blue: hsla(202, 98%, 62%, 1);
-        --ultra-pink: hsla(300, 100%, 66%, 1);
-        --black: hsla(0, 0%, 0%, 1);
-        --papaya-whip: hsla(38, 96%, 89%, 1);
-        --veronica: hsla(263, 95%, 61%, 1);
-
-        --gra: linear-gradient(to top, var(--color-button-accent), var(--ultra-pink));
-        --gra1: linear-gradient(to top, var(--picton-blue), var(--papaya-whip));
     }
 
     .theme-classic {
@@ -57,7 +41,7 @@
         --color-base: #f1f1f1;
         --color-base2: #8f92a6;
         --color-muted: #1a1926;
-        --color-inverted: #25283a;
+        --color-inverted: #252635;
         --color-text-accent: #2fd6b5;
         --color-fill: #16141c;
         --color-fill-accent: #16141c;
@@ -65,31 +49,36 @@
         --color-button-accent-hover: #e84774;
         --color-button-muted: #2a2635;
     }
-    
+
     .theme-forest {
-        --color-base: #e1e2e6;
-        --color-base2: #4a4b4f;
+        --color-base: #e3e3e3;
+        --color-base2: #111;
         --color-muted: #1d1e22;
         --color-inverted: #28292d;
         --color-text-accent: #2fd6b5;
         --color-fill: #1d1e22;
-        --color-fill-accent: #ffffff;
-        --color-button-accent: #d3f886;
-        --color-button-accent-hover: #e84774;
+        --color-fill-accent: #e4e3e8;
+        --color-button-accent: #86d581;
+        --color-button-accent-hover: #08b388;
         --color-button-muted: #d4e8e6;
     }
 
-    .theme-ebony {
-        --color-base: #f0f0f0;
-        --color-base2: #c0c0c1;
-        --color-muted: #000000;
-        --color-inverted: #2c2934;
-        --color-fill: #0e0d12;
-        --color-fill-accent: #000000;
-        --color-button-accent: #0073ff;
-        --color-button-accent-hover: #1a81ff;
-        --color-button-muted: #363440;
+    .theme-pale-tones {
+        --color-base: #000;
+        --color-base2: #000;
+        --color-muted: #1d1e22;
+        --color-inverted: #28292d;
+        --color-text-accent: #2fd6b5;
+        --color-fill: #959D9F;
+        --color-fill-accent: #EAEAEA;
+        --color-button-accent: #D7E5EE;
+        --color-button-accent-hover: #08b388;
+        --color-button-muted: #d4e8e6;
     }
+}
+
+.button {
+    @apply rounded-lg px-3 py-2 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-skin-button_accent;
 }
 
 .gradient1 {
@@ -103,13 +92,13 @@
 .rounded-custom {
     border-radius: 0% 100% 0% 100% / 0% 0% 100% 100%;
 }
+
 .radial {
-    background-image:
-            radial-gradient(at 8% 85%, hsla(110,97%,72%,1) 0px, transparent 50%),
-            radial-gradient(at 70% 7%, hsla(25,68%,70%,1) 0px, transparent 50%),
-            radial-gradient(at 1% 25%, hsla(155,60%,73%,1) 0px, transparent 50%),
-            radial-gradient(at 85% 52%, hsla(269,63%,61%,1) 0px, transparent 50%),
-            radial-gradient(at 86% 32%, hsla(212,70%,65%,1) 0px, transparent 50%),
-            radial-gradient(at 29% 6%, hsla(144,69%,72%,1) 0px, transparent 50%),
-            radial-gradient(at 61% 25%, hsla(111,71%,68%,1) 0px, transparent 50%);
+    background-image: radial-gradient(at 8% 85%, hsla(110, 97%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 70% 7%, hsla(25, 68%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 1% 25%, hsla(155, 60%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 85% 52%, hsla(269, 63%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 86% 32%, hsla(212, 70%, 65%, 1) 0px, transparent 50%),
+    radial-gradient(at 29% 6%, hsla(144, 69%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 61% 25%, hsla(111, 71%, 68%, 1) 0px, transparent 50%);
 }
