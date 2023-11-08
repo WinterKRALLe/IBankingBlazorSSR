@@ -1,0 +1,59 @@
+@page "/Identity/registration"
+@layout EmptyLayout
+
+<div class="w-full h-full md:h-screen flex justify-center items-center">
+    <div class="flex flex-col h-full justify-center items-center">
+        <div class="md:bg-skin-muted flex flex-col gap-8 px-6 py-12 rounded-xl md:shadow md:dark:shadow-[0_5px_25px_-5px_rgba(255,255,255,0.2)]">
+            <form class="flex flex-col md:flex-row ">
+                <div class="gap-4 flex flex-col h-full">
+                    <h1 class="text-2xl font-bold mb-8">Osobní údaje</h1>
+                    <div class="flex flex-col gap-2">
+                        <label class="font-bold" for="name">Jméno</label>
+                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="name" name="name" autocomplete="off"/>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="font-bold" for="surname">Příjmení</label>
+                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="surname" name="surname" autocomplete="off"/>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="font-bold" for="email">Email</label>
+                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="email" id="email" name="email" autocomplete="off"/>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="font-bold" for="tel">Telefon</label>
+                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="tel" id="tel" name="tel" autocomplete="off"/>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="font-bold" for="address">Bydliště</label>
+                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="address" name="address" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="h-full w-px bg-skin-inverted mx-8 hidden md:block"></div>
+                <div class="flex flex-col h-full gap-4 md:gap-0 md:justify-between">
+                    <div class="flex flex-col gap-4">
+                        <h1 class="text-2xl font-bold my-8 md:m-0 md:mb-8">Přihlašovací údaje</h1>
+                        <div class="flex flex-col gap-2">
+                            <label class="font-bold" for="username">Přihlašovací jméno</label>
+                            <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="username" name="username" autocomplete="off"/>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="font-bold" for="passwd">Heslo</label>
+                            <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="password" id="passwd" name="passwd"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-4 button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
+                        Vytvořit účet
+                    </button>
+                </div>
+            </form>
+            <div class="flex gap-2 justify-center w-full">
+                <p>Máte účet?</p>
+                <a href="/Identity/login" class="underline hover:no-underline text-skin-accent">Přihlásit se</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

@@ -40,6 +40,7 @@ module.exports = {
                     button_accent: 'var(--color-button-accent)',
                     button_accent_hover: 'var(--color-button-accent-hover)',
                     button_muted: 'var(--color-button-muted)',
+                    alpha_background: 'var(--alpha-background)',
                 },
             },
         },

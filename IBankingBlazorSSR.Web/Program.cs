@@ -1,10 +1,16 @@
+using IBankingBlazorSSR.Infrastructure.Database;
 using IBankingBlazorSSR.Web.Components;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("Default") ??
+                       throw new NullReferenceException("No connection string");
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddDbContextFactory<dbContext>((DbContextOptionsBuilder options) =>
+    options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

@@ -63,7 +63,7 @@
             <form class="flex flex-col p-4 w-full gap-4">
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32">Heslo</label>
-                    <button type="button" class="button border border-[#454a61] hover:bg-black whitespace-nowrap w-fit">Změnit heslo</button>
+                    <button type="button" class="button border border-[#454a61] hover:bg-black whitespace-nowrap w-fit" @onclick="ToggleModal">Změnit heslo</button>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="phone">Telefon</label>
@@ -85,6 +85,29 @@
     </div>
 </div>
 
+@if(showModal) {
+<dialog class="fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-skin-alpha_background flex justify-center items-center z-50 text-skin-base">
+    <div class="w-96 h-60 flex flex-col justify-between bg-skin-fill p-4 rounded-lg">
+        <div class="flex justify-between items-center">
+            <h1 class="text-xl">Zadejte své heslo</h1>
+            <button class="p-2 hover:bg-skin-inverted rounded-lg" @onclick="ToggleModal">
+                <svg class="fill-skin-base2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
+                    <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+                </svg>
+            </button>
+        </div>
+        <form class="flex flex-col">
+            <label for="auth" class="">Heslo</label>
+            <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" name="password" id="auth"/>
+        </form>
+        <div class="flex items-center justify-between">
+            <button class="button border border-[#454a61] hover:bg-black" type="button" @onclick="ToggleModal">Zrušit</button>
+            <button class="button bg-skin-button_accent hover:bg-skin-button_accent_hover" type="submit">Ověřit</button>
+        </div>
+    </div>
+</dialog>
+}
+
 @code {
     private bool isJavaScriptInitialized;
 
@@ -96,6 +119,13 @@
 
             await JSRuntime.InvokeVoidAsync("initializeTabs");
         }
+    }
+
+    private bool showModal;
+
+    private void ToggleModal()
+    {
+        showModal = !showModal;
     }
 
 }

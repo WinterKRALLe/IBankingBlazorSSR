@@ -23,6 +23,7 @@
         --color-button-accent: #6d4aff;
         --color-button-accent-hover: #6243e6;
         --color-button-muted: #f3f3f3;
+        --alpha-background: rgba(0, 0, 0, .48);
     }
 
     .theme-classic {
@@ -74,6 +75,26 @@
         --color-button-accent: #D7E5EE;
         --color-button-accent-hover: #08b388;
         --color-button-muted: #d4e8e6;
+    }
+}
+
+* {
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #383838;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #222;
+        border-radius: 16px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #181818;
     }
 }
 
