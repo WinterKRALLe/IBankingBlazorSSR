@@ -1,0 +1,15 @@
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/bin/Debug/net8.0/IBankingBlazorSSR.Domain.deps.json
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/bin/Debug/net8.0/IBankingBlazorSSR.Domain.runtimeconfig.json
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/bin/Debug/net8.0/IBankingBlazorSSR.Domain.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/bin/Debug/net8.0/IBankingBlazorSSR.Domain.pdb
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.csproj.AssemblyReference.cache
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.AssemblyInfoInputs.cache
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.AssemblyInfo.cs
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.csproj.CoreCompileInputs.cache
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.sourcelink.json
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/refint/IBankingBlazorSSR.Domain.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.pdb
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.genruntimeconfig.cache
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/ref/IBankingBlazorSSR.Domain.dll

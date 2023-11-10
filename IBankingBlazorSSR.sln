@@ -4,6 +4,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBankingBlazorSSR.Web", "IB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBankingBlazorSSR.Infrastructure", "IBankingBlazorSSR.Infrastructure\IBankingBlazorSSR.Infrastructure.csproj", "{195D2D25-2D25-436E-8E8C-89C14DFE5856}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBankingBlazorSSR.Domain", "IBankingBlazorSSR.Domain\IBankingBlazorSSR.Domain.csproj", "{4702281C-D896-4B6A-8569-37004D96202D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBankingBlazorSSR.Application", "IBankingBlazorSSR.Application\IBankingBlazorSSR.Application.csproj", "{930880A0-7463-4670-AFD4-E17AD47F0BF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IBankingBlazorSSR.Tests", "IBankingBlazorSSR.Tests\IBankingBlazorSSR.Tests.csproj", "{3108C80A-7150-433F-A0C5-1430EE5FF1F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +24,17 @@ Global
 		{195D2D25-2D25-436E-8E8C-89C14DFE5856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{195D2D25-2D25-436E-8E8C-89C14DFE5856}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{195D2D25-2D25-436E-8E8C-89C14DFE5856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4702281C-D896-4B6A-8569-37004D96202D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4702281C-D896-4B6A-8569-37004D96202D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4702281C-D896-4B6A-8569-37004D96202D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4702281C-D896-4B6A-8569-37004D96202D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{930880A0-7463-4670-AFD4-E17AD47F0BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{930880A0-7463-4670-AFD4-E17AD47F0BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{930880A0-7463-4670-AFD4-E17AD47F0BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{930880A0-7463-4670-AFD4-E17AD47F0BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3108C80A-7150-433F-A0C5-1430EE5FF1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3108C80A-7150-433F-A0C5-1430EE5FF1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3108C80A-7150-433F-A0C5-1430EE5FF1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3108C80A-7150-433F-A0C5-1430EE5FF1F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,8 @@
+using IBankingBlazorSSR.Application.Services;
+using IBankingBlazorSSR.Domain.Entities;
 using IBankingBlazorSSR.Infrastructure.Database;
 using IBankingBlazorSSR.Web.Components;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +12,12 @@ var connectionString = builder.Configuration.GetConnectionString("Default") ??
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddDbContextFactory<dbContext>((DbContextOptionsBuilder options) =>
+// builder.Services.AddDbContextFactory<dbContext>(options =>
+    // options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<AuthService>();
+
+builder.Services.AddDbContext<MyIdentityDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 var app = builder.Build();
