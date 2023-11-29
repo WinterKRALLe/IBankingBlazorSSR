@@ -1,0 +1,16 @@
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/bin/Debug/net8.0/IBankingBlazorSSR.Identity.deps.json
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/bin/Debug/net8.0/IBankingBlazorSSR.Identity.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/bin/Debug/net8.0/IBankingBlazorSSR.Identity.pdb
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/bin/Debug/net8.0/IBankingBlazorSSR.Domain.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/bin/Debug/net8.0/IBankingBlazorSSR.Domain.pdb
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/IBankingBlazorSSR.Identity.csproj.AssemblyReference.cache
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/IBankingBlazorSSR.Identity.GeneratedMSBuildEditorConfig.editorconfig
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/IBankingBlazorSSR.Identity.AssemblyInfoInputs.cache
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/IBankingBlazorSSR.Identity.AssemblyInfo.cs
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/IBankingBlazorSSR.Identity.csproj.CoreCompileInputs.cache
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/IBankingBlazorSSR.Identity.sourcelink.json
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/IBankingBlazorSSR.Identity.csproj.CopyComplete
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/IBankingBlazorSSR.Identity.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/refint/IBankingBlazorSSR.Identity.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/IBankingBlazorSSR.Identity.pdb
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Identity/obj/Debug/net8.0/ref/IBankingBlazorSSR.Identity.dll

@@ -1,6 +1,7 @@
-using IBankingBlazorSSR.Application.Services;
-using IBankingBlazorSSR.Domain.Entities;
+using IBankingBlazorSSR.Application.Abstraction;
+using IBankingBlazorSSR.Application.Implementation;
 using IBankingBlazorSSR.Infrastructure.Database;
+using IBankingBlazorSSR.Infrastructure.Identity;
 using IBankingBlazorSSR.Web.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +13,26 @@ var connectionString = builder.Configuration.GetConnectionString("Default") ??
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// builder.Services.AddDbContextFactory<dbContext>(options =>
-    // options.UseSqlServer(connectionString));
-
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddCascadingAuthenticationState();
 
 builder.Services.AddDbContext<MyIdentityDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+builder.Services.AddIdentity<RegistrationUser, IdentityRole<Guid>>(options =>
+    {
+        options.Password.RequireDigit = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 6;
+        options.Password.RequiredUniqueChars = 1;
+
+        options.SignIn.RequireConfirmedAccount = true;
+    })
+    .AddEntityFrameworkStores<MyIdentityDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 var app = builder.Build();
 
@@ -34,6 +48,9 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

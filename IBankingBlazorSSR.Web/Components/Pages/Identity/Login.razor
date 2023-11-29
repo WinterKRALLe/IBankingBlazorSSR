@@ -1,8 +1,14 @@
-@page "/Identity/login"
+@page "/Identity/login/{Text?}"
+
 @layout EmptyLayout
+
 
 <div class="w-full h-screen flex flex justify-center items-center">
     <div class="md:bg-skin-muted px-6 py-12 rounded-xl md:shadow md:dark:shadow-[0_5px_25px_-5px_rgba(255,255,255,0.2)] w-full max-w-md flex flex-col justify-center">
+        @if (Text is not null)
+        {
+            <p class="text-2xl my-4">Registrace byla úspěšná!</p>
+        }
         <h1 class="text-2xl font-bold">Přihlaste se</h1>
         <p class="text-skin-base2 text-sm mt-2">k vašemu internetovému bankovnictví</p>
         <form class="flex flex-col py-4 gap-8 w-full mt-8">
@@ -27,4 +33,6 @@
 
 @code {
 
+    [Parameter]
+    public string? Text { get; set; }
 }

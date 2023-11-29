@@ -1,17 +1,11 @@
-using IBankingBlazorSSR.Domain.Entities;
+using IBankingBlazorSSR.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace IBankingBlazorSSR.Infrastructure.Database;
 
-// public class MyIdentityDbContext(DbContextOptions<MyIdentityDbContext> options) :
-//     IdentityUserContext<ApplicationUser>(options);
-
-public class MyIdentityDbContext : IdentityDbContext
-{
-    public MyIdentityDbContext(DbContextOptions<MyIdentityDbContext> options)
-        : base(options)
-    {
-    }
-    public DbSet<ApplicationUser>? AppUsers { get; set; }
+public class MyIdentityDbContext : IdentityDbContext<RegistrationUser, IdentityRole<Guid>, Guid>
+{   
+    public MyIdentityDbContext(DbContextOptions<MyIdentityDbContext> options) : base(options) {}
 }

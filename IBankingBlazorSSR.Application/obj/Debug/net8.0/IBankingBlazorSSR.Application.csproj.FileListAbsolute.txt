@@ -1,5 +1,4 @@
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/bin/Debug/net8.0/IBankingBlazorSSR.Application.deps.json
-/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/bin/Debug/net8.0/IBankingBlazorSSR.Application.runtimeconfig.json
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/bin/Debug/net8.0/IBankingBlazorSSR.Application.dll
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/bin/Debug/net8.0/IBankingBlazorSSR.Application.pdb
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/bin/Debug/net8.0/IBankingBlazorSSR.Domain.dll
@@ -16,5 +15,4 @@
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/obj/Debug/net8.0/IBankingBlazorSSR.Application.dll
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/obj/Debug/net8.0/refint/IBankingBlazorSSR.Application.dll
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/obj/Debug/net8.0/IBankingBlazorSSR.Application.pdb
-/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/obj/Debug/net8.0/IBankingBlazorSSR.Application.genruntimeconfig.cache
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Application/obj/Debug/net8.0/ref/IBankingBlazorSSR.Application.dll

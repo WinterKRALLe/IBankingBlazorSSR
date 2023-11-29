@@ -1,31 +1,41 @@
 @page "/Identity/registration"
+@using IBankingBlazorSSR.Infrastructure.Identity
+@using Microsoft.AspNetCore.Identity
+@using System.ComponentModel.DataAnnotations
+
+@inject NavigationManager NavigationManager
+@inject UserManager<RegistrationUser> UserManager
+
 @layout EmptyLayout
 
 <div class="w-full h-full md:h-screen flex justify-center items-center">
     <div class="flex flex-col h-full justify-center items-center">
         <div class="md:bg-skin-muted flex flex-col gap-8 px-6 py-12 rounded-xl md:shadow md:dark:shadow-[0_5px_25px_-5px_rgba(255,255,255,0.2)]">
-            <form class="flex flex-col md:flex-row ">
+            <EditForm class="flex flex-col md:flex-row" Model="InputRegister" method="post" OnValidSubmit="RegisterUser" FormName="register">
+                <DataAnnotationsValidator/>
+
+
                 <div class="gap-4 flex flex-col h-full">
                     <h1 class="text-2xl font-bold mb-8">Osobní údaje</h1>
                     <div class="flex flex-col gap-2">
                         <label class="font-bold" for="name">Jméno</label>
-                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="name" name="name" autocomplete="off"/>
+                        <InputText @bind-Value="InputRegister!.Name" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="name" autocomplete="off"/>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="font-bold" for="surname">Příjmení</label>
-                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="surname" name="surname" autocomplete="off"/>
+                        <InputText @bind-Value="InputRegister!.SurName" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="surname" autocomplete="off"/>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="font-bold" for="email">Email</label>
-                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="email" id="email" name="email" autocomplete="off"/>
+                        <InputText @bind-Value="InputRegister!.Email" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="email" id="email" autocomplete="off"/>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="font-bold" for="tel">Telefon</label>
-                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="tel" id="tel" name="tel" autocomplete="off"/>
+                        <InputText @bind-Value="InputRegister!.Phone" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="tel" id="tel" autocomplete="off"/>
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="font-bold" for="address">Bydliště</label>
-                        <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="address" name="address" autocomplete="off"/>
+                        <InputText @bind-Value="InputRegister!.Address" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="address" autocomplete="off"/>
                     </div>
                 </div>
                 <div class="h-full w-px bg-skin-inverted mx-8 hidden md:block"></div>
@@ -34,18 +44,27 @@
                         <h1 class="text-2xl font-bold my-8 md:m-0 md:mb-8">Přihlašovací údaje</h1>
                         <div class="flex flex-col gap-2">
                             <label class="font-bold" for="username">Přihlašovací jméno</label>
-                            <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="username" name="username" autocomplete="off"/>
+                            <InputText @bind-Value="InputRegister!.UserName" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="username" autocomplete="off"/>
                         </div>
                         <div class="flex flex-col gap-2">
-                            <label class="font-bold" for="passwd">Heslo</label>
-                            <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="password" id="passwd" name="passwd"/>
+                            <label class="font-bold">Heslo</label>
+                            <InputText @bind-Value="InputRegister!.Password" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" autocomplete="new-password" aria-required="true" type="password"/>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="font-bold">Opakovat heslo</label>
+                            <InputText @bind-Value="InputRegister!.RepeatedPassword" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" autocomplete="new-password" aria-required="true" type="password"/>
                         </div>
                     </div>
                     <button type="submit" class="mt-4 button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
                         Vytvořit účet
                     </button>
                 </div>
-            </form>
+            <ValidationSummary/>
+            </EditForm>
+
+            <StatusMessage Message="@Message"/>
+            <div class="text-red-500">@_registrationResult</div>
+
             <div class="flex gap-2 justify-center w-full">
                 <p>Máte účet?</p>
                 <a href="/Identity/login" class="underline hover:no-underline text-skin-accent">Přihlásit se</a>
@@ -55,5 +74,96 @@
 </div>
 
 @code {
+
+    [SupplyParameterFromForm]
+    public RegisterViewModel InputRegister { get; set; } = default!;
+
+
+    protected override void OnInitialized() => InputRegister ??= new ();
+
+    private string _registrationResult;
+
+    private RegistrationUser CreateUser()
+    {
+        try
+        {
+            // Zde by měla být validace,
+            // pokud není přítomen <DataAnnotationsValidator />
+            RegistrationUser user = new()
+            {
+                Name = InputRegister.Name,
+                SurName = InputRegister.SurName,
+                Email = InputRegister.Email,
+                PhoneNumber = InputRegister.Phone,
+                Address = InputRegister.Address,
+                UserName = InputRegister.UserName,
+            };
+            return user;
+        }
+        catch
+        {
+            throw new InvalidOperationException($"Can't create an instance of '{nameof(RegistrationUser)}'. " +
+                                                $"Ensure that '{nameof(RegistrationUser)}' is not an abstract class and has a parameterless constructor.");
+        }
+    }
+
+    IEnumerable<IdentityError>? identityErrors;
+    string? Message => identityErrors is null ? null : "Error: " + string.Join(", ", identityErrors.Select(error => error.Description));
+
+    private async Task RegisterUser()
+    {
+        var user = CreateUser();
+
+        if (InputRegister.Password != null)
+        {
+            var result = await UserManager.CreateAsync(user, InputRegister.Password);
+
+            // if (!result.Succeeded)
+            //     foreach (IdentityError error in result.Errors)
+            //         Console.WriteLine($"Oops! {error.Description} {error.Code}");
+
+            if (result.Succeeded)
+            {
+                NavigationManager.NavigateTo("/Identity/login/registrationResult=Success");
+            }
+            else
+            {
+                identityErrors = result.Errors;
+            }
+        }
+    }
+
+    public class RegisterViewModel
+    {
+        [Required]
+        public string? Name { get; set; }
+
+        [Required]
+        public string? SurName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string? Email { get; set; }
+
+        [Required]
+        [Phone]
+        public string? Phone { get; set; }
+
+        [Required]
+        public string? Address { get; set; }
+
+        [Required]
+        public string? UserName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string? Password { get; set; }
+
+        [Required]
+        [Compare(nameof(Password), ErrorMessage = "Passwords don't match!")]
+        public string? RepeatedPassword { get; set; }
+    }
 
 }
