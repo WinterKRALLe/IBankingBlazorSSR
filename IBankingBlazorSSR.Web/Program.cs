@@ -1,5 +1,3 @@
-using IBankingBlazorSSR.Application.Abstraction;
-using IBankingBlazorSSR.Application.Implementation;
 using IBankingBlazorSSR.Infrastructure.Database;
 using IBankingBlazorSSR.Infrastructure.Identity;
 using IBankingBlazorSSR.Web.Components;
@@ -27,12 +25,23 @@ builder.Services.AddIdentity<RegistrationUser, IdentityRole<Guid>>(options =>
         options.Password.RequiredLength = 6;
         options.Password.RequiredUniqueChars = 1;
 
-        options.SignIn.RequireConfirmedAccount = true;
+        options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedEmail = false;
+        options.SignIn.RequireConfirmedPhoneNumber = false;
     })
     .AddEntityFrameworkStores<MyIdentityDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Cookie settings
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+    options.LoginPath = "/Identity/Login";
+    options.AccessDeniedPath = "/Identity/AccessDenied";
+    options.SlidingExpiration = true;
+});
 
 var app = builder.Build();
 
@@ -47,10 +56,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-app.UseAntiforgery();
 
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
