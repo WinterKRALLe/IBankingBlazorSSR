@@ -1,7 +1,11 @@
 @page "/Settings"
 
+@using IBankingBlazorSSR.Infrastructure.Identity
+@using Microsoft.AspNetCore.Identity
 
 @inject IJSRuntime JSRuntime;
+@inject UserAccessor UserAccessor;
+@inject UserManager<RegistrationUser> UserManager;
 
 <div
     role="tablist"
@@ -38,19 +42,19 @@
             <form class="flex flex-col p-4 gap-4">
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="name">Jméno</label>
-                    <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="text" id="name" name="name"/>
+                    <input @bind="_name" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="text" id="name" name="name"/>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="surname">Příjmení</label>
-                    <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="text" id="surname" name="surname"/>
+                    <input @bind="_surName" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="text" id="surname" name="surname"/>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="email">Email</label>
-                    <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="email" id="email" name="email"/>
+                    <input @bind="_email" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="email" id="email" name="email"/>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="address">Bydliště</label>
-                    <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="text" id="address" name="address"/>
+                    <input @bind="_address" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="text" id="address" name="address"/>
                 </div>
                 <button type="submit" class="sm:ml-32 text-sm w-fit button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
                     Potvrdit změny
@@ -59,19 +63,19 @@
         </div>
         <div>
             <h1 class="text-2xl font-bold">Zabezpečení</h1>
-            <form class="flex flex-col p-4 w-full gap-4">
-                <div class="flex flex-col sm:flex-row sm:items-center">
-                    <label class="font-bold inline-block w-32">Heslo</label>
-                    <button type="button" class="button border border-[#454a61] hover:bg-black whitespace-nowrap w-fit" @onclick="ToggleModal">Změnit heslo</button>
-                </div>
-                <div class="flex flex-col sm:flex-row sm:items-center">
-                    <label class="font-bold inline-block w-32" for="phone">Telefon</label>
-                    <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="tel" id="phone" name="phone"/>
-                    <button type="submit" class="sm:ml-12 mt-4 sm:mt-0 text-sm w-fit button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
-                        Uložit telefon
-                    </button>
-                </div>
-            </form>
+            @* <form class="flex flex-col p-4 w-full gap-4"> *@
+            <div class="flex flex-col sm:flex-row sm:items-center">
+                <label class="font-bold inline-block w-32">Heslo</label>
+                <button type="button" class="button border border-[#454a61] hover:bg-black whitespace-nowrap w-fit" @onclick="ToggleModal">Změnit heslo</button>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:items-center">
+                <label class="font-bold inline-block w-32" for="phone">Telefon</label>
+                <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="tel" id="phone" name="phone"/>
+                <button type="submit" class="sm:ml-12 mt-4 sm:mt-0 text-sm w-fit button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
+                    Uložit telefon
+                </button>
+            </div>
+            @* </form> *@
         </div>
     </div>
 
@@ -84,27 +88,28 @@
     </div>
 </div>
 
-@if(showModal) {
-<dialog class="fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-skin-alpha_background flex justify-center items-center z-50 text-skin-base">
-    <div class="w-96 h-60 flex flex-col justify-between bg-skin-fill p-4 rounded-lg">
-        <div class="flex justify-between items-center">
-            <h1 class="text-xl">Zadejte své heslo</h1>
-            <button class="p-2 hover:bg-skin-inverted rounded-lg" @onclick="ToggleModal">
-                <svg class="fill-skin-base2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                    <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
-                </svg>
-            </button>
+@if (_showModal)
+{
+    <dialog class="fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-skin-alpha_background flex justify-center items-center z-50 text-skin-base">
+        <div class="w-96 h-60 flex flex-col justify-between bg-skin-fill p-4 rounded-lg">
+            <div class="flex justify-between items-center">
+                <h1 class="text-xl">Zadejte své heslo</h1>
+                <button class="p-2 hover:bg-skin-inverted rounded-lg" @onclick="ToggleModal">
+                    <svg class="fill-skin-base2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
+                        <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+                    </svg>
+                </button>
+            </div>
+            <form class="flex flex-col">
+                <label for="auth" class="">Heslo</label>
+                <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" name="password" id="auth"/>
+            </form>
+            <div class="flex items-center justify-between">
+                <button class="button border border-[#454a61] hover:bg-black" type="button" @onclick="ToggleModal">Zrušit</button>
+                <button class="button bg-skin-button_accent hover:bg-skin-button_accent_hover" type="submit">Ověřit</button>
+            </div>
         </div>
-        <form class="flex flex-col">
-            <label for="auth" class="">Heslo</label>
-            <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" name="password" id="auth"/>
-        </form>
-        <div class="flex items-center justify-between">
-            <button class="button border border-[#454a61] hover:bg-black" type="button" @onclick="ToggleModal">Zrušit</button>
-            <button class="button bg-skin-button_accent hover:bg-skin-button_accent_hover" type="submit">Ověřit</button>
-        </div>
-    </div>
-</dialog>
+    </dialog>
 }
 
 @code {
@@ -120,11 +125,28 @@
         }
     }
 
-    private bool showModal;
+    private bool _showModal;
 
     private void ToggleModal()
     {
-        showModal = !showModal;
+        _showModal = !_showModal;
+    }
+
+    private RegistrationUser _user = default!;
+
+    private string? _name;
+    private string? _surName;
+    private string? _email;
+    private string? _address;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _user = await UserAccessor.GetRequiredUserAsync();
+
+        _name = _user.Name ?? string.Empty;
+        _surName = _user.SurName ?? string.Empty;
+        _email = _user.Email ?? string.Empty;
+        _address = _user.Address ?? string.Empty;
     }
 
 }
