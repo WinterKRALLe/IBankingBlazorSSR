@@ -1,5 +1,6 @@
 using IBankingBlazorSSR.Infrastructure.Database;
 using IBankingBlazorSSR.Infrastructure.Identity;
+using IBankingBlazorSSR.Web;
 using IBankingBlazorSSR.Web.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -35,16 +36,13 @@ builder.Services.AddIdentity<RegistrationUser, IdentityRole<Guid>>(options =>
     .AddEntityFrameworkStores<MyIdentityDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<CookieEvents>();
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    // Cookie settings
-    options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-
-    options.LoginPath = "/Identity/Login";
-    options.AccessDeniedPath = "/Identity/AccessDenied";
-    options.SlidingExpiration = true;
+    options.EventsType = typeof(CookieEvents); 
 });
+
 
 var app = builder.Build();
 
