@@ -5,7 +5,7 @@
 @using System.ComponentModel.DataAnnotations
 
 @inject NavigationManager NavigationManager
-@inject UserManager<RegistrationUser> UserManager
+@inject UserManager<ApplicationUser> UserManager
 
 @attribute [AllowAnonymous]
 
@@ -84,13 +84,13 @@
 
     protected override void OnInitialized() => InputRegister ??= new();
 
-    private RegistrationUser CreateUser()
+    private ApplicationUser CreateUser()
     {
         try
         {
     // Zde by měla být validace,
     // pokud není přítomen <DataAnnotationsValidator />
-            RegistrationUser user = new()
+            ApplicationUser user = new()
             {
                 Name = InputRegister.Name,
                 SurName = InputRegister.SurName,
@@ -103,8 +103,8 @@
         }
         catch
         {
-            throw new InvalidOperationException($"Can't create an instance of '{nameof(RegistrationUser)}'. " +
-                                                $"Ensure that '{nameof(RegistrationUser)}' is not an abstract class and has a parameterless constructor.");
+            throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+                                                $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor.");
         }
     }
 

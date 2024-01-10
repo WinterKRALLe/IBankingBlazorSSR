@@ -3,22 +3,24 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IBankingBlazorSSR.Infrastructure.Identity;
 
-public class UserAccessor(
+public sealed class UserAccessor(
     IHttpContextAccessor httpContextAccessor,
-    UserManager<RegistrationUser> userManager)
+    UserManager<ApplicationUser> userManager)
 {
-    public async Task<RegistrationUser> GetRequiredUserAsync()
+    public async Task<ApplicationUser> GetRequiredUserAsync()
     {
         var principal = httpContextAccessor.HttpContext?.User ??
                         throw new InvalidOperationException(
                             $"{nameof(GetRequiredUserAsync)} requires access to an {nameof(HttpContext)}.");
+
         var user = await userManager.GetUserAsync(principal);
+
         if (user is null)
         {
-            httpContextAccessor.HttpContext.Response.Redirect("/Identity/InvalidUser");
-            // status: Error: Unable to load user with ID '{userManager.GetUserId(principal)}'.
+            // Throws NavigationException, which is handled by the framework as a redirect.
+            
         }
-        
+
         return user;
     }
 }

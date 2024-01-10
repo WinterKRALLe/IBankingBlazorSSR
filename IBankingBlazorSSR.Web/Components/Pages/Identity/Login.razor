@@ -7,7 +7,7 @@
 @using Microsoft.AspNetCore.Antiforgery
 @using Microsoft.AspNetCore.Authentication
 
-@inject SignInManager<RegistrationUser> SignInManager
+@inject SignInManager<ApplicationUser> SignInManager
 @inject NavigationManager NavigatitorManager
 
 @attribute [RequireAntiforgeryToken]

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IBankingBlazorSSR.Infrastructure.Database;
 
-public class MyIdentityDbContext : IdentityDbContext<RegistrationUser, IdentityRole<Guid>, Guid>
+public class MyIdentityDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 {   
     public MyIdentityDbContext(DbContextOptions<MyIdentityDbContext> options) : base(options) {}
 }

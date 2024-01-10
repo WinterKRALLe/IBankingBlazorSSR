@@ -1,3 +1,5 @@
+using IBankingBlazorSSR.Application.Abstraction;
+using IBankingBlazorSSR.Application.Implementation;
 using IBankingBlazorSSR.Infrastructure.Database;
 using IBankingBlazorSSR.Infrastructure.Identity;
 using IBankingBlazorSSR.Web;
@@ -14,13 +16,13 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddCascadingAuthenticationState();
 
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<UserAccessor>();
 
-
-builder.Services.AddDbContext<MyIdentityDbContext>(options =>
+builder.Services.AddDbContextFactory<MyIdentityDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddIdentity<RegistrationUser, IdentityRole<Guid>>(options =>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
     {
         options.Password.RequireDigit = false;
         options.Password.RequireLowercase = false;

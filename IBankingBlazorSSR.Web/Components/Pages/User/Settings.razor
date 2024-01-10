@@ -2,10 +2,12 @@
 
 @using IBankingBlazorSSR.Infrastructure.Identity
 @using Microsoft.AspNetCore.Identity
+@using System.ComponentModel.DataAnnotations
 
 @inject IJSRuntime JSRuntime;
 @inject UserAccessor UserAccessor;
-@inject UserManager<RegistrationUser> UserManager;
+@inject UserManager<ApplicationUser> UserManager;
+@inject SignInManager<ApplicationUser> SignInManager;
 
 <div
     role="tablist"
@@ -39,43 +41,45 @@
         class="tab-panel flex flex-col transition duration-300 lg:ml-16 lg:mt-8 gap-8 lg:gap-16">
         <div>
             <h1 class="text-2xl font-bold">Účet a heslo</h1>
-            <form class="flex flex-col p-4 gap-4">
+            <EditForm Model="@InputProfile" class="flex flex-col p-4 gap-4" FormName="Profile" OnValidSubmit="@ChangeUserInfoAsync">
+                <DataAnnotationsValidator/>
+                <ValidationSummary/>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="name">Jméno</label>
-                    <input @bind="_name" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="text" id="name" name="name"/>
+                    <InputText @bind-Value="InputProfile.Name" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="name"/>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="surname">Příjmení</label>
-                    <input @bind="_surName" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="text" id="surname" name="surname"/>
+                    <InputText @bind-Value="InputProfile.SurName" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="surname"/>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="email">Email</label>
-                    <input @bind="_email" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="email" id="email" name="email"/>
+                    <InputText @bind-Value="InputProfile.Email" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="email"/>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="address">Bydliště</label>
-                    <input @bind="_address" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="text" id="address" name="address"/>
+                    <InputText @bind-Value="InputProfile.Address" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="address"/>
                 </div>
                 <button type="submit" class="sm:ml-32 text-sm w-fit button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
                     Potvrdit změny
                 </button>
-            </form>
+            </EditForm>
         </div>
         <div>
             <h1 class="text-2xl font-bold">Zabezpečení</h1>
-            @* <form class="flex flex-col p-4 w-full gap-4"> *@
             <div class="flex flex-col sm:flex-row sm:items-center">
                 <label class="font-bold inline-block w-32">Heslo</label>
                 <button type="button" class="button border border-[#454a61] hover:bg-black whitespace-nowrap w-fit" @onclick="ToggleModal">Změnit heslo</button>
             </div>
             <div class="flex flex-col sm:flex-row sm:items-center">
-                <label class="font-bold inline-block w-32" for="phone">Telefon</label>
-                <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="tel" id="phone" name="phone"/>
-                <button type="submit" class="sm:ml-12 mt-4 sm:mt-0 text-sm w-fit button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
-                    Uložit telefon
-                </button>
+                <EditForm FormName="PhoneNumber" Model="InputPhone" OnValidSubmit="@ChangePhoneAsync" method="post">
+                    <label class="font-bold inline-block w-32" for="phone">Telefon</label>
+                    <InputText @bind-Value="InputPhone.PhoneNumber" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="tel" id="phone" name="phone"/>
+                    <button type="submit" class="sm:ml-12 mt-4 sm:mt-0 text-sm w-fit button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
+                        Uložit telefon
+                    </button>
+                </EditForm>
             </div>
-            @* </form> *@
         </div>
     </div>
 
@@ -100,10 +104,10 @@
                     </svg>
                 </button>
             </div>
-            <form class="flex flex-col">
-                <label for="auth" class="">Heslo</label>
-                <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" name="password" id="auth"/>
-            </form>
+            @* <form class="flex flex-col"> *@
+            <label for="auth" class="">Heslo</label>
+            <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" name="password" id="auth"/>
+            @* </form> *@
             <div class="flex items-center justify-between">
                 <button class="button border border-[#454a61] hover:bg-black" type="button" @onclick="ToggleModal">Zrušit</button>
                 <button class="button bg-skin-button_accent hover:bg-skin-button_accent_hover" type="submit">Ověřit</button>
@@ -113,18 +117,6 @@
 }
 
 @code {
-    private bool isJavaScriptInitialized;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender && !isJavaScriptInitialized)
-        {
-            isJavaScriptInitialized = true;
-
-            await JSRuntime.InvokeVoidAsync("initializeTabs");
-        }
-    }
-
     private bool _showModal;
 
     private void ToggleModal()
@@ -132,21 +124,79 @@
         _showModal = !_showModal;
     }
 
-    private RegistrationUser _user = default!;
+    private ApplicationUser _user = default!;
+    private string? _phoneNumber;
 
-    private string? _name;
-    private string? _surName;
-    private string? _email;
-    private string? _address;
+    private string _success = "nic";
+
+    [SupplyParameterFromForm] public InputProfileModel InputProfile { get; set; } = default!;
+    [SupplyParameterFromForm] private InputPhoneModel InputPhone { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
+        InputProfile ??= new();
+        InputPhone ??= new();
+
         _user = await UserAccessor.GetRequiredUserAsync();
 
-        _name = _user.Name ?? string.Empty;
-        _surName = _user.SurName ?? string.Empty;
-        _email = _user.Email ?? string.Empty;
-        _address = _user.Address ?? string.Empty;
+        _phoneNumber = await UserManager.GetPhoneNumberAsync(_user);
+
+        InputProfile.Name ??= _user.Name;
+        InputProfile.SurName ??= _user.SurName;
+        InputProfile.Email ??= _user.Email;
+        InputProfile.Address ??= _user.Address;
+        InputPhone.PhoneNumber ??= _phoneNumber;
+    }
+
+    private async Task ChangePhoneAsync()
+    {
+        if (InputPhone.PhoneNumber != _phoneNumber)
+        {
+            var setPhoneResult = await UserManager.SetPhoneNumberAsync(_user, InputPhone.PhoneNumber);
+            if (!setPhoneResult.Succeeded)
+            {
+                _success = "NE";
+                return;
+            }
+        }
+
+        await SignInManager.RefreshSignInAsync(_user);
+        _success = "je to tam";
+    }
+
+    private async Task ChangeUserInfoAsync()
+    {
+        _user.Name = InputProfile.Name;
+        _user.SurName = InputProfile.SurName;
+        _user.Email = InputProfile.Email;
+        _user.Address = InputProfile.Address;
+
+        var result = await UserManager.UpdateAsync(_user);
+
+        if (result.Succeeded)
+        {
+            await SignInManager.RefreshSignInAsync(_user);
+            _success = "Success";
+        }
+        else
+        {
+            _success = "Failed to update user information. Please try again.";
+        }
+    }
+
+    public class InputProfileModel
+    {
+        public string? Name { get; set; }
+        public string? SurName { get; set; }
+        public string? Email { get; set; }
+        public string? Address { get; set; }
+    }
+
+    private class InputPhoneModel
+    {
+        [Phone]
+        [Display(Name = "Phone number")]
+        public string? PhoneNumber { get; set; }
     }
 
 }
