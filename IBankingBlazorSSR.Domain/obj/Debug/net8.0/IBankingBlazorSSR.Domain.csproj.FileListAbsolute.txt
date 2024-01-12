@@ -10,3 +10,9 @@
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/refint/IBankingBlazorSSR.Domain.dll
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.pdb
 /home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/ref/IBankingBlazorSSR.Domain.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/bin/Debug/net8.0/Microsoft.Extensions.Identity.Stores.xml
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.csproj.AssemblyReference.cache
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/obj/Debug/net8.0/IBankingBlazorSSR.Domain.csproj.CopyComplete
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Domain/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.xml

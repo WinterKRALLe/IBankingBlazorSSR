@@ -1,4 +1,11 @@
+@using IBankingBlazorSSR.Domain.Entities
+@using IBankingBlazorSSR.Infrastructure.Database
+@using IBankingBlazorSSR.Infrastructure.Identity
+@using Microsoft.EntityFrameworkCore
+
 @inject IJSRuntime JSRuntime;
+@inject UserAccessor UserAccessor;
+@inject MyIdentityDbContext _context;
 
 <div
     role="tablist"
@@ -52,20 +59,20 @@
         </div>
 
         <div class="w-screen md:w-auto shrink-0 flex overflow-x-auto snap-mandatory snap-x scroll-smooth gap-4 md:gap-8 px-2 lg:px-0">
-            <Card
-                BgGradient="background: linear-gradient(to left, #ea8d8d, #a890fe)"
-                State=true
-                CardNumber="1234 4321 1234 4321"
-                Expiration="10 / 25"
-                Cvv="001"
-                CardHolder="Holder"/>
-            <Card
-                BgGradient="background: linear-gradient(to right, #0Eb9bb, #F1322D)"
-                State=true
-                CardNumber="1234 4321 1234 4321"
-                Expiration="10 / 25"
-                Cvv="001"
-                CardHolder="Holder"/>
+            @if (_cards is not null)
+            {
+                foreach (var card in _cards)
+                {
+                    <Card
+                        BgGradient="@_background[_i]"
+                        CardNumber="@card.CardNumber"
+                        CardHolder="@card.Holder"
+                        Expiration="@card.Expiration"
+                        Cvv="@card.CVV"
+                        State="@card.State"/>
+                    _i++;
+                }
+            }
             <div class="w-32 shrink-0 snap-center rounded-lg flex justify-center items-center bg-skin-button_accent">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="fill-skin-base" viewBox="0 0 256 256">
                     <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
@@ -191,6 +198,26 @@
 
             await JSRuntime.InvokeVoidAsync("initializeTabs");
         }
+    }
+
+    private string[] _background =
+    {
+        "background: linear-gradient(to left, #ea8d8d, #a890fe)",
+        "background: linear-gradient(to right, #0Eb9bb, #F1322D)"
+    };
+
+    private int _i = 0;
+
+    private ApplicationUser _user = default!;
+    private List<IBankingBlazorSSR.Domain.Entities.Card>? _cards;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _user = await UserAccessor.GetRequiredUserAsync();
+
+        _cards = await _context.Cards
+            .Where(c => c.UserId == _user.Id)
+            .ToListAsync();
     }
 
 }

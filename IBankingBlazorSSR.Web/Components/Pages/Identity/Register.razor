@@ -1,8 +1,8 @@
 @page "/Identity/Registration"
 
-@using IBankingBlazorSSR.Infrastructure.Identity
 @using Microsoft.AspNetCore.Identity
 @using System.ComponentModel.DataAnnotations
+@using IBankingBlazorSSR.Domain.Entities
 
 @inject NavigationManager NavigationManager
 @inject UserManager<ApplicationUser> UserManager
@@ -65,9 +65,9 @@
             </EditForm>
 
             @if (Message != "")
-                    {
-                        <p>@Message</p>
-                    }
+            {
+                <p>@Message</p>
+            }
             <div class="flex gap-2 justify-center w-full">
                 <p>Máte účet?</p>
                 <a href="/Identity/Login" class="underline hover:no-underline text-skin-accent">Přihlásit se</a>
@@ -78,34 +78,22 @@
 
 @code {
 
-    [SupplyParameterFromForm]
-    public RegisterViewModel InputRegister { get; set; } = default!;
-
-
+    [SupplyParameterFromForm] public RegisterViewModel InputRegister { get; set; } = default!;
+    
     protected override void OnInitialized() => InputRegister ??= new();
 
     private ApplicationUser CreateUser()
     {
-        try
+        ApplicationUser user = new()
         {
-    // Zde by měla být validace,
-    // pokud není přítomen <DataAnnotationsValidator />
-            ApplicationUser user = new()
-            {
-                Name = InputRegister.Name,
-                SurName = InputRegister.SurName,
-                Email = InputRegister.Email,
-                PhoneNumber = InputRegister.Phone,
-                Address = InputRegister.Address,
-                UserName = InputRegister.UserName,
-            };
-            return user;
-        }
-        catch
-        {
-            throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
-                                                $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor.");
-        }
+            Name = InputRegister.Name,
+            SurName = InputRegister.SurName,
+            Email = InputRegister.Email,
+            PhoneNumber = InputRegister.Phone,
+            Address = InputRegister.Address,
+            UserName = InputRegister.UserName,
+        };
+        return user;
     }
 
     IEnumerable<IdentityError>? _identityErrors;
@@ -119,9 +107,9 @@
         {
             var result = await UserManager.CreateAsync(user, InputRegister.Password);
 
-    // if (!result.Succeeded)
-    //     foreach (IdentityError error in result.Errors)
-    //         Console.WriteLine($"Oops! {error.Description} {error.Code}");
+            // if (!result.Succeeded)
+            //     foreach (IdentityError error in result.Errors)
+            //         Console.WriteLine($"Oops! {error.Description} {error.Code}");
 
             if (result.Succeeded)
             {
@@ -136,25 +124,17 @@
 
     public class RegisterViewModel
     {
-        [Required]
-        public string? Name { get; set; }
+        [Required] public string? Name { get; set; }
 
-        [Required]
-        public string? SurName { get; set; }
+        [Required] public string? SurName { get; set; }
 
-        [Required]
-        [EmailAddress]
-        public string? Email { get; set; }
+        [Required] [EmailAddress] public string? Email { get; set; }
 
-        [Required]
-        [Phone]
-        public string? Phone { get; set; }
+        [Required] [Phone] public string? Phone { get; set; }
 
-        [Required]
-        public string? Address { get; set; }
+        [Required] public string? Address { get; set; }
 
-        [Required]
-        public string? UserName { get; set; }
+        [Required] public string? UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]

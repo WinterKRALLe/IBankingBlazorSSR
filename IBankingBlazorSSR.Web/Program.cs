@@ -1,5 +1,7 @@
 using IBankingBlazorSSR.Application.Abstraction;
 using IBankingBlazorSSR.Application.Implementation;
+using IBankingBlazorSSR.Domain;
+using IBankingBlazorSSR.Domain.Entities;
 using IBankingBlazorSSR.Infrastructure.Database;
 using IBankingBlazorSSR.Infrastructure.Identity;
 using IBankingBlazorSSR.Web;
@@ -19,7 +21,7 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<UserAccessor>();
 
-builder.Services.AddDbContextFactory<MyIdentityDbContext>(options =>
+builder.Services.AddDbContext<MyIdentityDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>

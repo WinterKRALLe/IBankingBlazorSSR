@@ -1,3 +1,4 @@
+using IBankingBlazorSSR.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 

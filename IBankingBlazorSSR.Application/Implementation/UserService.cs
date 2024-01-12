@@ -1,4 +1,6 @@
 using IBankingBlazorSSR.Application.Abstraction;
+using IBankingBlazorSSR.Domain;
+using IBankingBlazorSSR.Domain.Entities;
 using IBankingBlazorSSR.Infrastructure.Database;
 using IBankingBlazorSSR.Infrastructure.Identity;
 
