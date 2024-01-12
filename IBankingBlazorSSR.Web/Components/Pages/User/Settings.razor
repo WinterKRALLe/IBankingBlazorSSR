@@ -1,11 +1,12 @@
 @page "/Settings"
 
+@rendermode InteractiveServer
+
 @using IBankingBlazorSSR.Infrastructure.Identity
 @using Microsoft.AspNetCore.Identity
 @using System.ComponentModel.DataAnnotations
 @using IBankingBlazorSSR.Domain.Entities
 
-@inject IJSRuntime JSRuntime;
 @inject UserAccessor UserAccessor;
 @inject UserManager<ApplicationUser> UserManager;
 @inject SignInManager<ApplicationUser> SignInManager;
@@ -24,15 +25,15 @@
         class="relative block h-10 px-6 tab rounded-full text-skin-base transition">
         <span class="">Osobní údaje</span>
     </button>
-    <button
-        role="tab"
-        aria-selected="false"
-        aria-controls="panel-2"
-        id="tab-2"
-        tabindex="-1"
-        class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition">
-        <span class="tab-text ">Motiv</span>
-    </button>
+    @* <button *@
+    @*     role="tab" *@
+    @*     aria-selected="false" *@
+    @*     aria-controls="panel-2" *@
+    @*     id="tab-2" *@
+    @*     tabindex="-1" *@
+    @*     class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition"> *@
+    @*     <span class="tab-text ">Motiv</span> *@
+    @* </button> *@
 
 </div>
 <div class="mt-6 relative">
@@ -41,7 +42,7 @@
         id="panel-1"
         class="tab-panel flex flex-col transition duration-300 lg:ml-16 lg:mt-8 gap-8 lg:gap-16">
         <div>
-            <h1 class="text-2xl font-bold">Účet a heslo</h1>
+            <h1 class="text-2xl font-bold ml-2">Účet a heslo</h1>
             <EditForm Model="@InputProfile" class="flex flex-col p-4 gap-4" FormName="Profile" OnValidSubmit="@ChangeUserInfoAsync">
                 <DataAnnotationsValidator/>
                 <ValidationSummary/>
@@ -67,13 +68,9 @@
             </EditForm>
         </div>
         <div>
-            <h1 class="text-2xl font-bold">Zabezpečení</h1>
+            <h1 class="text-2xl font-bold ml-2">Zabezpečení</h1>
             <div class="flex flex-col sm:flex-row sm:items-center">
-                <label class="font-bold inline-block w-32">Heslo</label>
-                <button type="button" class="button border border-[#454a61] hover:bg-black whitespace-nowrap w-fit" @onclick="ToggleModal">Změnit heslo</button>
-            </div>
-            <div class="flex flex-col sm:flex-row sm:items-center">
-                <EditForm FormName="PhoneNumber" Model="@InputPhone" OnValidSubmit="@ChangePhoneAsync" method="post">
+                <EditForm FormName="PhoneNumber" Model="@InputPhone" OnValidSubmit="@ChangePhoneAsync" method="post" class="p-4">
                     <label class="font-bold inline-block w-32" for="phone">Telefon</label>
                     <InputText @bind-Value="InputPhone.PhoneNumber" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="phone"/>
                     <button type="submit" class="sm:ml-12 mt-4 sm:mt-0 text-sm w-fit button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
@@ -81,41 +78,78 @@
                     </button>
                 </EditForm>
             </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-center px-4 pt-2">
+                <label class="font-bold inline-block w-32">Heslo</label>
+                <button type="button" class="button text-sm border border-[#454a61] hover:bg-black whitespace-nowrap w-fit" @onclick="ToggleModal">Změnit heslo</button>
+            </div>
+
+            @if (_showModal)
+            {
+                <dialog class="fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-skin-alpha_background flex justify-center items-center z-50 text-skin-base">
+                    <div class="flex flex-col justify-between bg-skin-fill p-4 rounded-lg w-full md:w-fit">
+                        @_message
+                        <div class="flex justify-between items-center">
+                            <h1 class="text-xl">Zadejte své heslo</h1>
+                            <button class="p-2 hover:bg-skin-inverted rounded-lg" @onclick="() => ToggleModal()">
+                                <svg class="fill-skin-base2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
+                                    <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <EditForm Model="@InputChgPasswd" FormName="change-password" OnValidSubmit="@ChangeUserPasswordAsync" method="post" class="flex flex-col gap-4 mt-4">
+                            <DataAnnotationsValidator/>
+                            <ValidationSummary/>
+                            <div class="flex flex-col sm:flex-row sm:items-center">
+                                <label for="current-password" class="font-bold inline-block w-52">Aktuální heslo</label>
+                                <InputText @bind-Value="InputChgPasswd.CurrentPassword" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" id="current-password"/>
+                            </div>
+                            <div class="flex flex-col sm:flex-row sm:items-center">
+                                <label for="new-password" class="font-bold inline-block w-52">Nové heslo</label>
+                                <InputText @bind-Value="InputChgPasswd.NewPassword" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" id="new-password"/>
+                            </div>
+                            <div class="flex flex-col sm:flex-row sm:items-center">
+                                <label for="confirm-password" class="font-bold inline-block w-52">Potvrdit heslo</label>
+                                <InputText @bind-Value="InputChgPasswd.ConfirmPassword" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" id="confirm-password"/>
+                            </div>
+
+                            @* <div class="form-floating mb-3"> *@
+                            @*     <InputText id="old-password" type="password" @bind-Value="Input.OldPassword" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Please enter your old password."/> *@
+                            @*     <label for="old-password" class="form-label">Old password</label> *@
+                            @*     <ValidationMessage For="() => Input.OldPassword" class="text-danger"/> *@
+                            @* </div> *@
+                            @* <div class="form-floating mb-3"> *@
+                            @*     <InputText id="new-password" type="password" @bind-Value="Input.NewPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Please enter your new password."/> *@
+                            @*     <label for="new-password" class="form-label">New password</label> *@
+                            @*     <ValidationMessage For="() => Input.NewPassword" class="text-danger"/> *@
+                            @* </div> *@
+                            @* <div class="form-floating mb-3"> *@
+                            @*     <InputText id="confirm-password" type="password" @bind-Value="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Please confirm your new password."/> *@
+                            @*     <label for="confirm-password" class="form-label">Confirm password</label> *@
+                            @*     <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger"/> *@
+                            @* </div> *@
+
+                            <div class="flex items-center justify-between">
+                                <button class="button border border-[#454a61] hover:bg-black" type="button" @onclick="ToggleModal">Zrušit</button>
+                                <button class="button bg-skin-button_accent hover:bg-skin-button_accent_hover" type="submit">Potvrdit</button>
+                            </div>
+                        </EditForm>
+                    </div>
+                </dialog>
+            }
         </div>
     </div>
 
-    <div
-        role="tabpanel"
-        id="panel-2"
-        class="absolute top-0 invisible opacity-0 tab-panel p-6 transition duration-300">
-        <h2 class="text-xl font-semibold text-gray-800">Third tab panel</h2>
-        <p class="mt-4 text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas dolores voluptate temporibus, atque ab eos, delectus at ad hic voluptatem veritatis iure, nulla voluptates quod nobis doloremque eaque! Perferendis, soluta.</p>
-    </div>
+    @* <div *@
+    @*     role="tabpanel" *@
+    @*     id="panel-2" *@
+    @*     class="absolute top-0 invisible opacity-0 tab-panel p-6 transition duration-300"> *@
+    @*     <h2 class="text-xl font-semibold text-gray-800">Third tab panel</h2> *@
+    @*     <p class="mt-4 text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas dolores voluptate temporibus, atque ab eos, delectus at ad hic voluptatem veritatis iure, nulla voluptates quod nobis doloremque eaque! Perferendis, soluta.</p> *@
+    @* </div> *@
+
+
 </div>
-
-@if (_showModal)
-{
-    <dialog class="fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-skin-alpha_background flex justify-center items-center z-50 text-skin-base">
-        <div class="w-96 h-60 flex flex-col justify-between bg-skin-fill p-4 rounded-lg">
-            <div class="flex justify-between items-center">
-                <h1 class="text-xl">Zadejte své heslo</h1>
-                <button class="p-2 hover:bg-skin-inverted rounded-lg" @onclick="ToggleModal">
-                    <svg class="fill-skin-base2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                        <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
-                    </svg>
-                </button>
-            </div>
-            @* <form class="flex flex-col"> *@
-            <label for="auth" class="">Heslo</label>
-            <input class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" name="password" id="auth"/>
-            @* </form> *@
-            <div class="flex items-center justify-between">
-                <button class="button border border-[#454a61] hover:bg-black" type="button" @onclick="ToggleModal">Zrušit</button>
-                <button class="button bg-skin-button_accent hover:bg-skin-button_accent_hover" type="submit">Ověřit</button>
-            </div>
-        </div>
-    </dialog>
-}
 
 @code {
     private bool _showModal;
@@ -127,14 +161,17 @@
 
     private ApplicationUser _user = default!;
     private string? _phoneNumber;
+    private string _message;
 
     [SupplyParameterFromForm] private InputProfileModel InputProfile { get; set; } = default!;
     [SupplyParameterFromForm] private InputPhoneModel InputPhone { get; set; } = default!;
+    [SupplyParameterFromForm] private InputChgPasswdModel InputChgPasswd { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
         InputProfile ??= new();
         InputPhone ??= new();
+        InputChgPasswd ??= new();
 
         _user = await UserAccessor.GetRequiredUserAsync();
 
@@ -154,11 +191,16 @@
             var setPhoneResult = await UserManager.SetPhoneNumberAsync(_user, InputPhone.PhoneNumber);
             if (setPhoneResult.Succeeded)
             {
-                await SignInManager.RefreshSignInAsync(_user);
+                try
+                {
+                    await SignInManager.RefreshSignInAsync(_user);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception during RefreshSignInAsync: {ex.Message}");
+                }
             }
         }
-
-        await SignInManager.RefreshSignInAsync(_user);
     }
 
     private async Task ChangeUserInfoAsync()
@@ -172,11 +214,39 @@
 
         if (result.Succeeded)
         {
-            await SignInManager.RefreshSignInAsync(_user);
+            try
+            {
+                await SignInManager.RefreshSignInAsync(_user);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception during RefreshSignInAsync: {ex.Message}");
+            }
         }
     }
 
-    private class InputProfileModel
+    private async Task ChangeUserPasswordAsync()
+    {
+        var changePasswordResult = await UserManager.ChangePasswordAsync(_user, InputChgPasswd.CurrentPassword!, InputChgPasswd.NewPassword!);
+        if (changePasswordResult.Succeeded)
+        {
+            try
+            {
+                _showModal = !_showModal;
+                await SignInManager.RefreshSignInAsync(_user);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception during RefreshSignInAsync: {ex.Message}");
+            }
+        }
+        else
+        {
+            _message = $"Error: {string.Join(",", changePasswordResult.Errors.Select(error => error.Description))}";
+        }
+    }
+
+    private sealed class InputProfileModel
     {
         public string? Name { get; set; }
         public string? SurName { get; set; }
@@ -184,11 +254,30 @@
         public string? Address { get; set; }
     }
 
-    private class InputPhoneModel
+    private sealed class InputPhoneModel
     {
         [Phone]
         [Display(Name = "Phone number")]
         public string? PhoneNumber { get; set; }
+    }
+
+    private sealed class InputChgPasswdModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Current password")]
+        public string? CurrentPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "New password")]
+        public string? NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string? ConfirmPassword { get; set; }
     }
 
 }

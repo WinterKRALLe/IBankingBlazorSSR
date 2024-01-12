@@ -28,51 +28,51 @@
         </div>
     </div>
 </div>
-@* <div class="flex flex-col gap-4 p-2 whitespace-nowrap w-full"> *@
-@*     <div class="flex items-center justify-between gap-4"> *@
-@*         @if (State) *@
-@*         { *@
-@*             <span class="flex items-center gap-1"> *@
-@*                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#00FF00" viewBox="0 0 256 256"> *@
-@*                     <path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path> *@
-@*                 </svg> *@
-@*                 <span class="text-green-500">Aktivní</span> *@
-@*             </span> *@
-@*             <button class="bg-skin-inverted rounded-lg" @onclick="ToggleCard"> *@
-@*                 <svg class="fill-skin-base2 p-1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#000000" viewBox="0 0 256 256"> *@
-@*                     <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm88,104a87.56,87.56,0,0,1-20.41,56.28L71.72,60.4A88,88,0,0,1,216,128ZM40,128A87.56,87.56,0,0,1,60.41,71.72L184.28,195.6A88,88,0,0,1,40,128Z"></path> *@
-@*                 </svg> *@
-@*             </button> *@
-@*         } *@
-@*         else *@
-@*         { *@
-@*             <span class="flex items-center gap-1"> *@
-@*                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FF0000" viewBox="0 0 256 256"> *@
-@*                     <path d="M165.66,101.66,139.31,128l26.35,26.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path> *@
-@*                 </svg> *@
-@*                 <span class="text-red-500">Nektivní</span> *@
-@*             </span> *@
-@*             <button class="bg-skin-inverted rounded-lg" @onclick="ToggleCard"> *@
-@*                 <svg class="fill-skin-base2 p-1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256"> *@
-@*                     <path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path> *@
-@*                 </svg> *@
-@*             </button> *@
-@*         } *@
-@*     </div> *@
-@* *@
-@*     <div class="w-full mx-auto h-px bg-skin-inverted"></div> *@
-@* *@
-@*     <div class="flex items-center justify-between gap-4"> *@
-@*         <span> *@
-@*             Limity *@
-@*         </span> *@
-@*         <button class="bg-skin-inverted rounded-lg"> *@
-@*             <svg class="fill-skin-base2 p-1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#000000" viewBox="0 0 256 256"> *@
-@*                 <path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"></path> *@
-@*             </svg> *@
-@*         </button> *@
-@*     </div> *@
-@* </div> *@
+<div class="flex flex-col gap-4 p-2 whitespace-nowrap w-full">
+    <div class="flex items-center justify-between gap-4">
+        @if (State)
+        {
+            <span class="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#00FF00" viewBox="0 0 256 256">
+                    <path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+                </svg>
+                <span class="text-green-500">Aktivní</span>
+            </span>
+            <button class="bg-skin-inverted rounded-lg" @onclick="ToggleCard">
+                <svg class="fill-skin-base2 p-1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#000000" viewBox="0 0 256 256">
+                    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm88,104a87.56,87.56,0,0,1-20.41,56.28L71.72,60.4A88,88,0,0,1,216,128ZM40,128A87.56,87.56,0,0,1,60.41,71.72L184.28,195.6A88,88,0,0,1,40,128Z"></path>
+                </svg>
+            </button>
+        }
+        else
+        {
+            <span class="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FF0000" viewBox="0 0 256 256">
+                    <path d="M165.66,101.66,139.31,128l26.35,26.34a8,8,0,0,1-11.32,11.32L128,139.31l-26.34,26.35a8,8,0,0,1-11.32-11.32L116.69,128,90.34,101.66a8,8,0,0,1,11.32-11.32L128,116.69l26.34-26.35a8,8,0,0,1,11.32,11.32ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+                </svg>
+                <span class="text-red-500">Nektivní</span>
+            </span>
+            <button class="bg-skin-inverted rounded-lg" @onclick="ToggleCard">
+                <svg class="fill-skin-base2 p-1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                    <path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+                </svg>
+            </button>
+        }
+    </div>
+
+    <div class="w-full mx-auto h-px bg-skin-inverted"></div>
+
+    <div class="flex items-center justify-between gap-4">
+        <span>
+            Limity
+        </span>
+        <button class="bg-skin-inverted rounded-lg">
+            <svg class="fill-skin-base2 p-1" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#000000" viewBox="0 0 256 256">
+                <path d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"></path>
+            </svg>
+        </button>
+    </div>
+</div>
 
 @code {
 

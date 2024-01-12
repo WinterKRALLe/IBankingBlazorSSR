@@ -5,7 +5,7 @@
     <div class="flex flex-col items-center justify-center gap-2">
         <div class="flex justify-center relative">
             <span class="mr-2">@Currency</span>
-            <span class="text-3xl lg:text-4xl font-bold tracking-wider">@Amount</span>
+            <span class="text-3xl lg:text-4xl font-bold tracking-wider">@Balance</span>
         </div>
         <span class="tracking-wider text-skin-base2 text-sm">@AccountNum</span>
     </div>
@@ -69,5 +69,5 @@
     public string Currency { get; set; } = string.Empty;
 
     [Parameter]
-    public string Amount { get; set; } = string.Empty;
+    public decimal Balance { get; set; }
 }

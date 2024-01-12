@@ -38,10 +38,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Db21wb25lbnRzL1NpZGVOYXYucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/Components/Components/Tabs.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Db21wb25lbnRzL1RhYnMucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/Components/Components/Transaction.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Db21wb25lbnRzL1RyYW5zYWN0aW9uLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -56,6 +52,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/Components/Pages/Home/AddCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lL0FkZENhcmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/Components/Pages/Home/Index.razor]
