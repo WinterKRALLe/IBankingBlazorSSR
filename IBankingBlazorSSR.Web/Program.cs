@@ -1,6 +1,5 @@
 using IBankingBlazorSSR.Application.Abstraction;
 using IBankingBlazorSSR.Application.Implementation;
-using IBankingBlazorSSR.Domain;
 using IBankingBlazorSSR.Domain.Entities;
 using IBankingBlazorSSR.Infrastructure.Database;
 using IBankingBlazorSSR.Infrastructure.Identity;
@@ -18,6 +17,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddCascadingAuthenticationState();
 
+builder.Services.AddScoped<INumberGenerator, NumberGenerator>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<UserAccessor>();
 

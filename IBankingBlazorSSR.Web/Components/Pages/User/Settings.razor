@@ -1,7 +1,5 @@
 @page "/Settings"
 
-@rendermode InteractiveServer
-
 @using IBankingBlazorSSR.Infrastructure.Identity
 @using Microsoft.AspNetCore.Identity
 @using System.ComponentModel.DataAnnotations
@@ -87,10 +85,10 @@
             @if (_showModal)
             {
                 <dialog class="fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-skin-alpha_background flex justify-center items-center z-50 text-skin-base">
-                    <div class="flex flex-col justify-between bg-skin-fill p-4 rounded-lg w-full md:w-fit">
+                    <div class="flex flex-col justify-center bg-skin-fill p-4 rounded-lg w-full md:w-fit h-full md:h-fit">
                         @_message
                         <div class="flex justify-between items-center">
-                            <h1 class="text-xl">Zadejte své heslo</h1>
+                            <h1 class="text-xl">Změnit heslo</h1>
                             <button class="p-2 hover:bg-skin-inverted rounded-lg" @onclick="() => ToggleModal()">
                                 <svg class="fill-skin-base2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
                                     <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
@@ -112,22 +110,6 @@
                                 <label for="confirm-password" class="font-bold inline-block w-52">Potvrdit heslo</label>
                                 <InputText @bind-Value="InputChgPasswd.ConfirmPassword" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" type="password" id="confirm-password"/>
                             </div>
-
-                            @* <div class="form-floating mb-3"> *@
-                            @*     <InputText id="old-password" type="password" @bind-Value="Input.OldPassword" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Please enter your old password."/> *@
-                            @*     <label for="old-password" class="form-label">Old password</label> *@
-                            @*     <ValidationMessage For="() => Input.OldPassword" class="text-danger"/> *@
-                            @* </div> *@
-                            @* <div class="form-floating mb-3"> *@
-                            @*     <InputText id="new-password" type="password" @bind-Value="Input.NewPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Please enter your new password."/> *@
-                            @*     <label for="new-password" class="form-label">New password</label> *@
-                            @*     <ValidationMessage For="() => Input.NewPassword" class="text-danger"/> *@
-                            @* </div> *@
-                            @* <div class="form-floating mb-3"> *@
-                            @*     <InputText id="confirm-password" type="password" @bind-Value="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Please confirm your new password."/> *@
-                            @*     <label for="confirm-password" class="form-label">Confirm password</label> *@
-                            @*     <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger"/> *@
-                            @* </div> *@
 
                             <div class="flex items-center justify-between">
                                 <button class="button border border-[#454a61] hover:bg-black" type="button" @onclick="ToggleModal">Zrušit</button>

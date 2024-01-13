@@ -36,12 +36,14 @@
                 </button>
             </li>
             <li>
-                <form @onsubmit="LogoutUser" @formname="logout" method="post" class="button flex items-center gap-4 font-semibold text-red-500 hover:bg-red-500/20 focus:bg-red-400/20">
-                    <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
-                        <path d="M112,216a8,8,0,0,1-8,8H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h56a8,8,0,0,1,0,16H48V208h56A8,8,0,0,1,112,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L196.69,120H104a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,221.66,122.34Z"></path>
-                    </svg>
+                <form @onsubmit="LogoutUser" @formname="logout" method="post" class="block flex items-center gap-4 font-semibold text-red-500 hover:bg-red-500/20 focus:bg-red-400/20 rounded-lg">
                     <AntiforgeryToken/>
-                    <button type="submit" class="hidden md:block">Odhlásit</button>
+                    <button type="submit" class="button flex items-center gap-4">
+                        <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
+                            <path d="M112,216a8,8,0,0,1-8,8H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h56a8,8,0,0,1,0,16H48V208h56A8,8,0,0,1,112,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L196.69,120H104a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,221.66,122.34Z"></path>
+                        </svg>
+                        <span class="hidden md:block">Odhlásit</span>
+                    </button>
                 </form>
             </li>
         </ul>
@@ -49,7 +51,7 @@
     <div class="fixed bottom-0 left-0 right-0 flex justify-around bg-skin-fill p-2 lg:hidden border-t border-px border-black">
         @foreach (var link in _menuLinks)
         {
-            <a href="@link.Link" class="flex-grow flex flex-col justify-center items-center gap-1 @(currentPath == link.Link ? "text-skin-base" : "text-skin-base2")">
+            <a href="@link.Link" class="flex-grow flex flex-col justify-center items-center gap-1 @(currentPath == link.Link ? "text-skin-accent" : "text-skin-base2")">
                 @link.Svg
                 <span class="text-xs">@link.Text</span>
             </a>
@@ -105,10 +107,9 @@
         _menuVisible = !_menuVisible;
     }
 
-    [CascadingParameter]
-    private HttpContext HttpContext { get; set; } = default!;
+    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
 
-    public async Task LogoutUser()
+    private async Task LogoutUser()
     {
         var user = HttpContext.User;
         _errormessage = user.Identity?.Name ?? "Anonymous";
@@ -117,7 +118,7 @@
         {
             _errormessage = "You have";
             await SignInManager.SignOutAsync();
-            NavigationManager.NavigateTo("/Identity/Login/logoutResult=Success");
+            NavigationManager.NavigateTo("/Identity/Login");
         }
         else
         {

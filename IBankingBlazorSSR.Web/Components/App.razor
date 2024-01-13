@@ -12,8 +12,10 @@
 </head>
 
 <body class="relative overflow-x-hidden w-full h-full">
-<Routes />
-<script src="_framework/blazor.web.js"></script>
+<Routes @rendermode="InteractiveServer"/>
+<div id="reconnect-modal" style="display: none;"></div>
+<script src="_framework/blazor.web.js" autostart="false"></script>
+<script src="js/boot.js"></script>
 <script src="js/theme.js"></script>
 <script src="js/tabs.js"></script>
 </body>

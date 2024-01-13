@@ -1,5 +1,4 @@
-/* _content/IBankingBlazorSSR.Web/Components/App.razor.rz.scp.css */
-#reconnect-modal[b-6cgwni0zv1] {
+#reconnect-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 100; /* Sit on top */

@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/projectbundle/IBankingBlazorSSR.Web.bundle.scp.css",
+      "PackagePath": "staticwebassets/IBankingBlazorSSR.Web.bundle.scp.css"
+    },
+    {
       "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/css/app.css",
       "PackagePath": "staticwebassets/css/app.css"
     },
@@ -111,6 +115,10 @@
     {
       "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/images/stars.png",
       "PackagePath": "staticwebassets/images/stars.png"
+    },
+    {
+      "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/js/boot.js",
+      "PackagePath": "staticwebassets/js/boot.js"
     },
     {
       "Id": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/js/tabs.js",

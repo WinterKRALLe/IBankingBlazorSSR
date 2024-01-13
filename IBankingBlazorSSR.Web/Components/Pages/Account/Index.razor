@@ -1,7 +1,5 @@
 ﻿@page "/"
 
-@rendermode InteractiveServer
-
 <PageTitle>IBanking</PageTitle>
 
 @using IBankingBlazorSSR.Domain.Entities
@@ -51,7 +49,7 @@
     <div
         role="tabpanel"
         id="panel-1"
-        class="tab-panel flex flex-col gap-y-12 transition duration-300 relative overflow-x-hidden">
+        class="tab-panel flex flex-col gap-y-12 transition duration-300 relative overflow-x-hidden px-4">
         <div class="flex gap-10 mt-4 flex-wrap">
             @if (_accounts is not null)
             {
@@ -66,26 +64,33 @@
             }
         </div>
 
-        <div class="w-screen md:w-auto shrink-0 flex overflow-x-auto snap-mandatory snap-x scroll-smooth gap-4 md:gap-8 px-2 lg:px-0">
-            @if (_cards is not null)
-            {
-                foreach (var card in _cards)
+        <div>
+            <div class="flex items-center gap-4">
+                <h1 class="text-2xl">Karty</h1><span class="text-skin-base2">(@_cardCount / 3)</span>
+            </div>
+            <div class="w-screen md:w-auto shrink-0 flex items-center overflow-x-auto snap-mandatory snap-x scroll-smooth gap-4 md:gap-8 px-2 lg:px-0">
+                @if (_cards is not null)
                 {
-                    <Card
-                        BgGradient="@_background[_i]"
-                        CardNumber="@card.CardNumber"
-                        CardHolder="@card.Holder"
-                        Expiration="@card.Expiration"
-                        Cvv="@card.CVV"
-                        State="@card.State"/>
-                    _i++;
+                    @foreach (var card in _cards.Select((card, index) => new { Card = card, Index = index }))
+                    {
+                        <Card
+                            BgGradient="@_background[card.Index % _background.Length]"
+                            CardNumber="@card.Card.CardNumber"
+                            CardHolder="@card.Card.Holder"
+                            Expiration="@card.Card.Expiration"
+                            Cvv="@card.Card.CVV"
+                            State="@card.Card.State"/>
+                    }
                 }
-            }
-            <button class="w-32 shrink-0 snap-center rounded-lg flex justify-center items-center bg-skin-button_accent" @onclick="() => AddCard()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="fill-skin-base" viewBox="0 0 256 256">
-                    <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
-                </svg>
-            </button>
+                @if (_cardCount < 3)
+                {
+                    <button class="w-32 aspect-square shrink-0 snap-center rounded-xl flex justify-center items-center bg-skin-button_accent" @onclick="AddCard">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="fill-skin-base" viewBox="0 0 256 256">
+                            <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
+                        </svg>
+                    </button>
+                }
+            </div>
         </div>
     </div>
 
@@ -213,13 +218,14 @@
         NavigationManager.NavigateTo("/Cards/AddCard");
     }
 
-    private string[] _background =
+    private readonly string[] _background =
     {
         "background: linear-gradient(to left, #ea8d8d, #a890fe)",
-        "background: linear-gradient(to right, #0Eb9bb, #F1322D)"
+        "background: linear-gradient(to right, #0Eb9bb, #F1322D)",
+        "background: linear-gradient(to right, #FB7BA2, #FCE043)"
     };
-
-    private int _i;
+    
+    private int _cardCount;
 
     private ApplicationUser _user = default!;
     private List<Domain.Entities.Account>? _accounts;
@@ -236,6 +242,8 @@
         _cards = await Context.Cards
             .Where(c => c.UserId == _user.Id)
             .ToListAsync();
+
+        _cardCount = _cards.Count;
     }
 
 }

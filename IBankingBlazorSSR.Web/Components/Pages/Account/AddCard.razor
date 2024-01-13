@@ -1,0 +1,100 @@
+@page "/Cards/AddCard"
+@using IBankingBlazorSSR.Infrastructure.Database
+@using Microsoft.EntityFrameworkCore
+@using IBankingBlazorSSR.Application.Abstraction
+@using IBankingBlazorSSR.Domain.Entities
+@using IBankingBlazorSSR.Infrastructure.Identity
+@using System.ComponentModel.DataAnnotations
+@using Card = IBankingBlazorSSR.Domain.Entities.Card
+
+@inject MyIdentityDbContext _context
+@inject NavigationManager NavigationManager
+@inject INumberGenerator _numberGenerator
+@inject UserAccessor UserAccessor;
+
+<EditForm Model="InputAddCard" OnValidSubmit="AddCardAsync" FormName="add-card" method="post">
+    <InputText @bind-Value="InputAddCard.CardNumber" readonly/>
+    <InputText @bind-Value="InputAddCard.Holder" readonly/>
+    <InputText @bind-Value="InputAddCard.Expiration" readonly/>
+    <InputText @bind-Value="InputAddCard.Cvv" readonly/>
+    <InputCheckbox @bind-Value="InputAddCard.State"/>
+    <button type="submit">Přidat</button>
+</EditForm>
+
+
+@code {
+    [CascadingParameter] HttpContext? HttpContext { get; set; }
+
+    [SupplyParameterFromForm] private InputAddCardModel InputAddCard { get; set; } = default!;
+
+    private ApplicationUser _user { get; set; } = default!;
+
+    private string? _cardNumber;
+    private string? _holder;
+    private string? _expiration;
+    private string? _cvv;
+
+    protected override async Task OnInitializedAsync()
+    {
+        InputAddCard ??= new();
+
+        _user = await UserAccessor.GetRequiredUserAsync();
+
+        int cardCount = await _context.Cards.CountAsync(card => card.UserId == _user.Id);
+        if (cardCount == 3)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+
+        _cardNumber = _numberGenerator.GenerateCardNumber(_user.Id);
+        _holder = _user.Name + " " + _user.SurName;
+        _expiration = GenerateExpirationDate();
+        _cvv = _numberGenerator.GenerateCVV();
+
+        InputAddCard.CardNumber = _cardNumber;
+        InputAddCard.Holder = _holder;
+        InputAddCard.Expiration = _expiration;
+        InputAddCard.Cvv = _cvv;
+    }
+
+    private async Task AddCardAsync()
+    {
+        if (_cardNumber is not null &&
+            _holder is not null &&
+            _expiration is not null &&
+            _cvv is not null)
+        {
+            var card = new Card
+            {
+                CardNumber = _cardNumber,
+                Holder = _holder,
+                Expiration = _expiration,
+                CVV = _cvv,
+                State = InputAddCard.State,
+                UserId = _user.Id
+            };
+
+            _context.Cards.Add(card);
+            await _context.SaveChangesAsync();
+        }
+    }
+
+    private string GenerateExpirationDate()
+    {
+        DateTime currentDate = DateTime.Now;
+        DateTime expirationDate = currentDate.AddYears(5);
+
+        string formattedDate = $"{expirationDate.Month:D2} / {expirationDate.Year % 100:D2}";
+        return formattedDate;
+    }
+
+    private sealed class InputAddCardModel
+    {
+        [Required] public string CardNumber { get; set; } = null!;
+        [Required] public string Holder { get; set; } = null!;
+        [Required] public string Expiration { get; set; } = null!;
+        [Required] public string Cvv { get; set; } = null!;
+        [Required] public bool State { get; set; } = true;
+    }
+
+}

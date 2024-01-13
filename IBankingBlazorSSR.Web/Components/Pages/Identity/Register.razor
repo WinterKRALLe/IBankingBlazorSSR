@@ -2,10 +2,15 @@
 
 @using Microsoft.AspNetCore.Identity
 @using System.ComponentModel.DataAnnotations
+@using IBankingBlazorSSR.Application.Abstraction
 @using IBankingBlazorSSR.Domain.Entities
+@using IBankingBlazorSSR.Infrastructure.Database
+@using Account = IBankingBlazorSSR.Domain.Entities.Account
 
 @inject NavigationManager NavigationManager
 @inject UserManager<ApplicationUser> UserManager
+@inject MyIdentityDbContext _context
+@inject INumberGenerator _numberGenerator
 
 @attribute [AllowAnonymous]
 
@@ -113,7 +118,27 @@
 
             if (result.Succeeded)
             {
-                NavigationManager.NavigateTo("/Identity/Login/registrationResult=Success");
+                var account = new Account
+                {
+                    Type = "Osobní",
+                    Currency = "CZK",
+                    Balance = 500,
+                    AccountNumber = _numberGenerator.GenerateAccountNumber(user.Id),
+                    UserId = user.Id
+                };
+                
+                _context.Accounts.Add(account);
+                
+                int savedChanges = await _context.SaveChangesAsync();
+
+                if (savedChanges > 0)
+                {
+                    NavigationManager.NavigateTo("/Identity/Login/registrationResult=Success");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to add the account to the database.");
+                }
             }
             else
             {
