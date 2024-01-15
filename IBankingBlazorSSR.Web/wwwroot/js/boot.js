@@ -48,11 +48,13 @@
     let currentReconnectionProcess = null;
 
     Blazor.start({
-        reconnectionHandler: {
-            onConnectionDown: () => currentReconnectionProcess ??= startReconnectionProcess(),
-            onConnectionUp: () => {
-                currentReconnectionProcess?.cancel();
-                currentReconnectionProcess = null;
+        circuit: {
+            reconnectionHandler: {
+                onConnectionDown: () => currentReconnectionProcess ??= startReconnectionProcess(),
+                onConnectionUp: () => {
+                    currentReconnectionProcess?.cancel();
+                    currentReconnectionProcess = null;
+                }
             }
         }
     });

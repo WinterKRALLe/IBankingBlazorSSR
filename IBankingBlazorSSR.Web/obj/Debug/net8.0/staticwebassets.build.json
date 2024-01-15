@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wV3hEWa2J9hYkd8KdRZaUN6tiwCuHUWLayeeJ5Hg040=",
+  "Hash": "COUW3xR84hsT3HLCtH8KWM3FSPh3DOd0agjLK0Zlt6c=",
   "Source": "IBankingBlazorSSR.Web",
   "BasePath": "_content/IBankingBlazorSSR.Web",
   "Mode": "Default",
@@ -16,44 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/bundle/IBankingBlazorSSR.Web.styles.css",
-      "SourceId": "IBankingBlazorSSR.Web",
-      "SourceType": "Computed",
-      "ContentRoot": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/bundle/",
-      "BasePath": "_content/IBankingBlazorSSR.Web",
-      "RelativePath": "IBankingBlazorSSR.Web.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/bundle/IBankingBlazorSSR.Web.styles.css"
-    },
-    {
-      "Identity": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/projectbundle/IBankingBlazorSSR.Web.bundle.scp.css",
-      "SourceId": "IBankingBlazorSSR.Web",
-      "SourceType": "Computed",
-      "ContentRoot": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/projectbundle/",
-      "BasePath": "_content/IBankingBlazorSSR.Web",
-      "RelativePath": "IBankingBlazorSSR.Web.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/obj/Debug/net8.0/scopedcss/projectbundle/IBankingBlazorSSR.Web.bundle.scp.css"
-    },
     {
       "Identity": "/home/winter/RiderProjects/IBankingBlazorSSR/IBankingBlazorSSR.Web/wwwroot/css/app.css",
       "SourceId": "IBankingBlazorSSR.Web",

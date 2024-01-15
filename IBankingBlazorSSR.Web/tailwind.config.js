@@ -43,6 +43,11 @@ module.exports = {
                     alpha_background: 'var(--alpha-background)',
                 },
             },
+            borderColor: {
+                skin: {
+                    inverted: 'var(--color-inverted)',
+                }
+            }
         },
     },
     plugins: [],

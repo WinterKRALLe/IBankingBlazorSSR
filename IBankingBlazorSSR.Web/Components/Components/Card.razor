@@ -1,5 +1,5 @@
 <div class="flex flex-col h-full py-2">
-    <div class="flex flex-col snap-center whitespace-nowrap flex-[0_0_80%] lg:flex-[0_0_30%] shrink-0 !aspect-[2/1.25] justify-around p-4 lg:p-6 rounded-lg w-full max-w-sm text-md lg:text-xl" style="@(BgGradient)">
+    <div class="flex z-10 flex-col snap-center whitespace-nowrap flex-[0_0_80%] lg:flex-[0_0_30%] shrink-0 !aspect-[2/1.25] justify-around p-4 lg:p-6 rounded-lg w-full max-w-sm text-md lg:text-xl" style="@(BgGradient)">
         <div class="flex items-center justify-between gap-8">
             <span class="tracking-wider">@CardNumber</span>
             <span class="hover:cursor-pointer invisible">
@@ -29,8 +29,8 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col gap-4 p-2 whitespace-nowrap w-full border-px border-white rounded-lg">
-        <div class="flex items-center justify-between gap-4">
+    <div class="-mt-4 border border-t-0 border-skin-inverted flex flex-col gap-4 p-2 whitespace-nowrap w-full rounded-b-lg">
+        <div class="flex pt-6 items-center justify-between gap-4">
             @if (State)
             {
                 <span class="flex items-center gap-1">

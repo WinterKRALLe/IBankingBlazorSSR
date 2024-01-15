@@ -16,12 +16,7 @@ public sealed class UserAccessor(
 
         var user = await userManager.GetUserAsync(principal);
 
-        if (user is null)
-        {
-            // Throws NavigationException, which is handled by the framework as a redirect.
-            
-        }
-
-        return user;
+        if (user != null) return user;
+        return null!;
     }
 }

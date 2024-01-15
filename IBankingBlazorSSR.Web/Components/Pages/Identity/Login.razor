@@ -2,15 +2,14 @@
 @attribute [AllowAnonymous]
 
 @using Microsoft.AspNetCore.Identity
-@using System.ComponentModel.DataAnnotations
-@using IBankingBlazorSSR.Domain.Entities
+@using IBankingBlazorSSR.Application.Abstraction
+@using IBankingBlazorSSR.Application.ViewModels
 @using Microsoft.AspNetCore.Antiforgery
 @using Microsoft.AspNetCore.Authentication
 
-@inject SignInManager<ApplicationUser> SignInManager
-@inject NavigationManager NavigatitorManager
+@inject NavigationManager NavigationManager
 
-@attribute [RequireAntiforgeryToken]
+@inject IIdentityService IdentityService
 
 @layout EmptyLayout
 
@@ -18,29 +17,24 @@
 
 <div class="w-full h-screen flex flex justify-center items-center">
     <div class="md:bg-skin-muted px-6 py-12 rounded-xl md:shadow md:dark:shadow-[0_5px_25px_-5px_rgba(255,255,255,0.2)] w-full max-w-md flex flex-col justify-center">
-        @if (!string.IsNullOrEmpty(_successMessage))
-        {
-            <p class="text-2xl text-skin-accent font-bold">@_successMessage</p>
-        }
         <h1 class="text-2xl font-bold mt-8">Přihlaste se</h1>
         <p class="text-skin-base2 text-sm mt-2">k vašemu internetovému bankovnictví</p>
-        <EditForm class="flex flex-col py-4 gap-8 w-full mt-8" Model="InputLogin" method="post" OnValidSubmit="LoginUser" FormName="login">
+        <EditForm class="flex flex-col py-4 gap-8 w-full mt-8" Model="ViewModel" method="post" OnValidSubmit="LoginUser" FormName="login">
             <DataAnnotationsValidator/>
+            <ValidationSummary/>
             <div class="flex flex-col gap-2">
                 <label class="font-bold inline-block" for="username">Přihlašovací jméno</label>
-                <InputText @bind-Value="InputLogin.Username" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="username" autocomplete="off"/>
+                <InputText @bind-Value="ViewModel.Username" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="text" id="username" autocomplete="off"/>
             </div>
             <div class="flex flex-col gap-2">
                 <label class="font-bold inline-block w-52" for="passwd">Heslo</label>
-                <InputText @bind-Value="InputLogin.Password" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="password" id="passwd"/>
+                <InputText @bind-Value="ViewModel.Password" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2" type="password" id="passwd"/>
             </div>
             <button type="submit" class="mt-4 button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
                 Přihlásit
             </button>
         </EditForm>
-
-            <p>@_errorMessage</p>
-<p>@_errorMessage</p>
+        @_err
         <div class="mt-4 flex gap-2 justify-center">
             <p>Jste tady nový?</p>
             <a href="/Identity/Registration" class="underline hover:no-underline text-skin-accent">Vytvořit účet</a>
@@ -49,74 +43,35 @@
 </div>
 
 @code {
-    private string? _errorMessage;
+    [CascadingParameter] public HttpContext HttpContext { get; set; } = default!;
 
-    [Parameter]
-    public string? Text { get; set; }
+    [SupplyParameterFromForm] private LoginViewModel ViewModel { get; set; } = default!;
     
-    private string _successMessage = string.Empty;
+    string _err = "";
     
-    [CascadingParameter]
-    public HttpContext HttpContext { get; set; } = default!;
-
-    [SupplyParameterFromForm]
-    public InputModel InputLogin { get; set; } = default!;
-
-    public class InputModel
-    {
-        [Required]
-        public string Username { get; set; } = null!;
-
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; } = null!;
-    }
-
     protected override async Task OnInitializedAsync()
     {
-        InputLogin ??= new();
+        ViewModel ??= new();
+        
         if (HttpMethods.IsGet(HttpContext.Request.Method))
         {
-    // Clear the existing external cookie to ensure a clean login process
+            // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
         }
-        if (!string.IsNullOrEmpty(Text))
-        {
-            if (Text.Contains("logoutResult=Success"))
-            {
-                _successMessage = "Úspěšně odhlášen";
-            }
-            else if (Text.Contains("registrationResult=Success"))
-            {
-                _successMessage = "Registrace byla úspěšná";
-            }
-        }
     }
-    
 
-    public async Task LoginUser()
+    private async Task LoginUser()
     {
-        var result = await SignInManager.PasswordSignInAsync(InputLogin.Username, InputLogin.Password, true, true);
-        if (result.Succeeded)
+        _err = string.Empty;
+        var (success, errorMessage) = await IdentityService.LoginUserAsync(ViewModel.Username, ViewModel.Password);
+        
+        if (success)
         {
-            _errorMessage = "success";
-            NavigatitorManager.NavigateTo("/");
-        }
-        else if (result.RequiresTwoFactor)
-        {
-            _errorMessage = "requiresTwoFactor";
-        }
-        else if (result.IsLockedOut)
-        {
-            _errorMessage = "locked";
-        }
-        else if (result.IsNotAllowed)
-        {
-            _errorMessage = "notAllowed";
+            NavigationManager.NavigateTo("/");
         }
         else
         {
-            _errorMessage = "Invalid username or password";
+            _err = errorMessage;
         }
     }
 

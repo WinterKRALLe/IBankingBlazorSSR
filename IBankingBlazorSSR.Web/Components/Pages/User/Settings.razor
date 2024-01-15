@@ -1,13 +1,9 @@
 @page "/Settings"
 
-@using IBankingBlazorSSR.Infrastructure.Identity
-@using Microsoft.AspNetCore.Identity
-@using System.ComponentModel.DataAnnotations
-@using IBankingBlazorSSR.Domain.Entities
+@using IBankingBlazorSSR.Application.Abstraction
+@using IBankingBlazorSSR.Application.ViewModels
 
-@inject UserAccessor UserAccessor;
-@inject UserManager<ApplicationUser> UserManager;
-@inject SignInManager<ApplicationUser> SignInManager;
+@inject IUserService UserService
 
 <div
     role="tablist"
@@ -23,16 +19,6 @@
         class="relative block h-10 px-6 tab rounded-full text-skin-base transition">
         <span class="">Osobní údaje</span>
     </button>
-    @* <button *@
-    @*     role="tab" *@
-    @*     aria-selected="false" *@
-    @*     aria-controls="panel-2" *@
-    @*     id="tab-2" *@
-    @*     tabindex="-1" *@
-    @*     class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition"> *@
-    @*     <span class="tab-text ">Motiv</span> *@
-    @* </button> *@
-
 </div>
 <div class="mt-6 relative">
     <div
@@ -46,19 +32,19 @@
                 <ValidationSummary/>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="name">Jméno</label>
-                    <InputText @bind-Value="InputProfile.Name" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="name"/>
+                    <InputText @bind-Value="InputProfile.Name" class="input" id="name"/>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="surname">Příjmení</label>
-                    <InputText @bind-Value="InputProfile.SurName" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="surname"/>
+                    <InputText @bind-Value="InputProfile.SurName" class="input" id="surname"/>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="email">Email</label>
-                    <InputText @bind-Value="InputProfile.Email" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="email"/>
+                    <InputText @bind-Value="InputProfile.Email" class="input" id="email"/>
                 </div>
                 <div class="flex flex-col sm:flex-row sm:items-center">
                     <label class="font-bold inline-block w-32" for="address">Bydliště</label>
-                    <InputText @bind-Value="InputProfile.Address" class="w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="address"/>
+                    <InputText @bind-Value="InputProfile.Address" class="input" id="address"/>
                 </div>
                 <button type="submit" class="sm:ml-32 text-sm w-fit button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
                     Potvrdit změny
@@ -68,7 +54,7 @@
         <div>
             <h1 class="text-2xl font-bold ml-2">Zabezpečení</h1>
             <div class="flex flex-col sm:flex-row sm:items-center">
-                <EditForm FormName="PhoneNumber" Model="@InputPhone" OnValidSubmit="@ChangePhoneAsync" method="post" class="p-4">
+                <EditForm FormName="PhoneNumber" Model="InputPhone" OnValidSubmit="@ChangePhoneAsync" method="post" class="p-4">
                     <label class="font-bold inline-block w-32" for="phone">Telefon</label>
                     <InputText @bind-Value="InputPhone.PhoneNumber" class="bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm" id="phone"/>
                     <button type="submit" class="sm:ml-12 mt-4 sm:mt-0 text-sm w-fit button border border-[#454a61] bg-skin-button_accent hover:bg-skin-button_accent_hover">
@@ -86,7 +72,6 @@
             {
                 <dialog class="fixed h-full w-full top-0 left-0 right-0 bottom-0 bg-skin-alpha_background flex justify-center items-center z-50 text-skin-base">
                     <div class="flex flex-col justify-center bg-skin-fill p-4 rounded-lg w-full md:w-fit h-full md:h-fit">
-                        @_message
                         <div class="flex justify-between items-center">
                             <h1 class="text-xl">Změnit heslo</h1>
                             <button class="p-2 hover:bg-skin-inverted rounded-lg" @onclick="() => ToggleModal()">
@@ -121,16 +106,6 @@
             }
         </div>
     </div>
-
-    @* <div *@
-    @*     role="tabpanel" *@
-    @*     id="panel-2" *@
-    @*     class="absolute top-0 invisible opacity-0 tab-panel p-6 transition duration-300"> *@
-    @*     <h2 class="text-xl font-semibold text-gray-800">Third tab panel</h2> *@
-    @*     <p class="mt-4 text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas dolores voluptate temporibus, atque ab eos, delectus at ad hic voluptatem veritatis iure, nulla voluptates quod nobis doloremque eaque! Perferendis, soluta.</p> *@
-    @* </div> *@
-
-
 </div>
 
 @code {
@@ -141,13 +116,11 @@
         _showModal = !_showModal;
     }
 
-    private ApplicationUser _user = default!;
-    private string? _phoneNumber;
-    private string _message;
+    [SupplyParameterFromForm] private ProfileViewModel InputProfile { get; set; } = new();
+    [SupplyParameterFromForm] private PhoneViewModel InputPhone { get; set; } = new();
+    [SupplyParameterFromForm] private ChangePasswordViewModel InputChgPasswd { get; set; } = new();
 
-    [SupplyParameterFromForm] private InputProfileModel InputProfile { get; set; } = default!;
-    [SupplyParameterFromForm] private InputPhoneModel InputPhone { get; set; } = default!;
-    [SupplyParameterFromForm] private InputChgPasswdModel InputChgPasswd { get; set; } = default!;
+    private ProfileData ProfileData { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -155,111 +128,29 @@
         InputPhone ??= new();
         InputChgPasswd ??= new();
 
-        _user = await UserAccessor.GetRequiredUserAsync();
+        ProfileData = await UserService.PopulateUserSettingsAsync();
 
-        _phoneNumber = await UserManager.GetPhoneNumberAsync(_user);
+        InputProfile.Name ??= ProfileData.ProfileModel.Name;
+        InputProfile.SurName ??= ProfileData.ProfileModel.SurName;
+        InputProfile.Email ??= ProfileData.ProfileModel.Email;
+        InputProfile.Address ??= ProfileData.ProfileModel.Address;
 
-        InputProfile.Name ??= _user.Name;
-        InputProfile.SurName ??= _user.SurName;
-        InputProfile.Email ??= _user.Email;
-        InputProfile.Address ??= _user.Address;
-        InputPhone.PhoneNumber ??= _phoneNumber;
+        InputPhone.PhoneNumber ??= ProfileData.PhoneModel.PhoneNumber;
     }
 
     private async Task ChangePhoneAsync()
     {
-        if (InputPhone.PhoneNumber != _phoneNumber)
-        {
-            var setPhoneResult = await UserManager.SetPhoneNumberAsync(_user, InputPhone.PhoneNumber);
-            if (setPhoneResult.Succeeded)
-            {
-                try
-                {
-                    await SignInManager.RefreshSignInAsync(_user);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Exception during RefreshSignInAsync: {ex.Message}");
-                }
-            }
-        }
+        await UserService.ChangePhoneAsync(InputPhone);
     }
 
     private async Task ChangeUserInfoAsync()
     {
-        _user.Name = InputProfile.Name;
-        _user.SurName = InputProfile.SurName;
-        _user.Email = InputProfile.Email;
-        _user.Address = InputProfile.Address;
-
-        var result = await UserManager.UpdateAsync(_user);
-
-        if (result.Succeeded)
-        {
-            try
-            {
-                await SignInManager.RefreshSignInAsync(_user);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception during RefreshSignInAsync: {ex.Message}");
-            }
-        }
+        await UserService.ChangeUserInfoAsync(InputProfile);
     }
 
     private async Task ChangeUserPasswordAsync()
     {
-        var changePasswordResult = await UserManager.ChangePasswordAsync(_user, InputChgPasswd.CurrentPassword!, InputChgPasswd.NewPassword!);
-        if (changePasswordResult.Succeeded)
-        {
-            try
-            {
-                _showModal = !_showModal;
-                await SignInManager.RefreshSignInAsync(_user);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception during RefreshSignInAsync: {ex.Message}");
-            }
-        }
-        else
-        {
-            _message = $"Error: {string.Join(",", changePasswordResult.Errors.Select(error => error.Description))}";
-        }
-    }
-
-    private sealed class InputProfileModel
-    {
-        public string? Name { get; set; }
-        public string? SurName { get; set; }
-        public string? Email { get; set; }
-        public string? Address { get; set; }
-    }
-
-    private sealed class InputPhoneModel
-    {
-        [Phone]
-        [Display(Name = "Phone number")]
-        public string? PhoneNumber { get; set; }
-    }
-
-    private sealed class InputChgPasswdModel
-    {
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
-        public string? CurrentPassword { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "New password")]
-        public string? NewPassword { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-        public string? ConfirmPassword { get; set; }
+        await UserService.ChangeUserPasswordAsync(InputChgPasswd);
     }
 
 }

@@ -26,4 +26,5 @@ public class MyIdentityDbContext : IdentityDbContext<ApplicationUser, IdentityRo
 
     public DbSet<Card> Cards { get; set; }
     public DbSet<Account> Accounts { get; set; }
+    public DbSet<Movement> Movements { get; set; }
 }

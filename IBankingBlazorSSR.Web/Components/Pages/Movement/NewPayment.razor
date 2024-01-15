@@ -1,0 +1,56 @@
+@page "/Payments/New/{AccountNumberFromParam}"
+
+@using IBankingBlazorSSR.Application.Abstraction
+@using IBankingBlazorSSR.Application.ViewModels
+
+@inject NavigationManager NavigationManager
+@inject IMovementService MovementService
+
+<div class="w-full h-full p-4 md:mt-8 md:mx-4 overflow-x-hidden">
+    <EditForm Model="ViewModel" OnValidSubmit="NewPaymentAsync" FormName="new-payment" method="post" class="flex flex-col gap-8 w-full md:w-fit">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+        <div class="flex flex-col sm:flex-row sm:items-center">
+            <label class="font-bold inline-block w-52" for="AccountNumberFrom">Z účtu</label>
+            <InputText @bind-Value="ViewModel.AccountNumberFrom" readonly class="input" id="AccountNumberFrom"/>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center">
+            <label class="font-bold inline-block w-52" for="AccountNumberTo">Na účet</label>
+            <InputText @bind-Value="ViewModel.AccountNumberTo" class="input" id="AccountNumberTo"/>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center">
+            <label class="font-bold inline-block w-52" for="Amount">Částka (CZK)</label>
+            <InputNumber @bind-Value="ViewModel.Amount" class="input" id="Amount"/>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center">
+            <label class="font-bold inline-block w-52" for="message">Zpráva</label>
+            <InputTextArea @bind-Value="ViewModel.Message" class="input resize-none" id="message"/>
+        </div>
+        <div class="flex items-center justify-between">
+            <a class="button border border-[#454a61] hover:bg-black" href="/">Zrušit</a>
+            <button class="button bg-skin-button_accent hover:bg-skin-button_accent_hover" type="submit">Zaplatit</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter] public string AccountNumberFromParam { get; set; } = null!;
+
+    [SupplyParameterFromForm] private MovementViewModel ViewModel { get; set; } = default!;
+
+    protected override Task OnInitializedAsync()
+    {
+        ViewModel ??= new();
+
+        ViewModel.AccountNumberFrom = AccountNumberFromParam;
+        return Task.CompletedTask;
+    }
+
+    private async Task NewPaymentAsync()
+    {
+        var result = await MovementService.ProcessPaymentAsync(ViewModel);
+
+        if (result)
+            NavigationManager.NavigateTo("/");
+    }
+}

@@ -1,10 +1,11 @@
-using IBankingBlazorSSR.Domain;
-using IBankingBlazorSSR.Domain.Entities;
-using IBankingBlazorSSR.Infrastructure.Identity;
+using IBankingBlazorSSR.Application.ViewModels;
 
 namespace IBankingBlazorSSR.Application.Abstraction;
 
 public interface IUserService
 {
-    Task UpdateUserAsync(ApplicationUser user);
+    Task<ProfileData> PopulateUserSettingsAsync();
+    Task<bool> ChangePhoneAsync(PhoneViewModel model);
+    Task<bool> ChangeUserInfoAsync(ProfileViewModel model);
+    Task<bool> ChangeUserPasswordAsync(ChangePasswordViewModel model);
 }

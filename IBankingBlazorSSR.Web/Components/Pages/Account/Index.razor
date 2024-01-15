@@ -1,222 +1,133 @@
 ﻿@page "/"
+@using IBankingBlazorSSR.Application.Abstraction
+@using IBankingBlazorSSR.Application.Implementation
+@using Microsoft.IdentityModel.Tokens
 
 <PageTitle>IBanking</PageTitle>
 
-@using IBankingBlazorSSR.Domain.Entities
-@using IBankingBlazorSSR.Infrastructure.Database
-@using IBankingBlazorSSR.Infrastructure.Identity
-@using Microsoft.EntityFrameworkCore
+@inject IAccountService AccountService
 
-@inject NavigationManager NavigationManager;
-@inject IJSRuntime JsRuntime;
-@inject UserAccessor UserAccessor;
-@inject MyIdentityDbContext Context;
-
-<div
-    role="tablist"
-    aria-label="tabs"
-    class="sticky top-0 z-20 flex bg-skin-fill lg:gap-10 relative w-full h-12 justify-around md:justify-start items-center transition px-1 md:px-3 border-b border-[#25283a]">
-    <div class="absolute indicator z-20 h-10 my-auto top-0 bottom-0 left-0 border-b-2 border-gray-400"></div>
-    <button
-        role="tab"
-        aria-selected="true"
-        aria-controls="panel-1"
-        id="tab-1"
-        tabindex="0"
-        class="relative block h-10 px-6 tab rounded-full text-skin-base transition">
-        <span class="">Účty</span>
-    </button>
-    <button
-        role="tab"
-        aria-selected="false"
-        aria-controls="panel-2"
-        id="tab-2"
-        tabindex="-1"
-        class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition">
-        <span class="tab-text ">Pohyby</span>
-    </button>
-    <button
-        role="tab"
-        aria-selected="false"
-        aria-controls="panel-3"
-        id="tab-3"
-        tabindex="-1"
-        class="relative block h-10 px-6 tab rounded-full text-skin-base2 transition">
-        <span>Akce</span>
-    </button>
+<div class="w-full flex px-4 gap-x-4 border-b border-[#25283a]">
+    <label class="w-fit px-4 py-2 cursor-pointer text-skin-base2 focus:outline-none peer-checked:text-skin-base relative peer-checked:after:scale-x-100 peer-checked:after:opacity-100 peer-checked:after:block transition-all duration-500 ease-in-out after:h-0.5 after:bg-white after:absolute after:left-0 after:right-0 after:-bottom-1 after:opacity-0 after:scale-x-0 after:transition-all after:duration-[250] after:ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] after:hover:opacity-100 after:hover:scale-x-100" for="yes">Produkty</label>
+    <label class="w-fit px-4 py-2 cursor-pointer text-skin-base2 focus:outline-none peer-checked:text-skin-base relative peer-checked:after:scale-x-100 peer-checked:after:opacity-100 peer-checked:after:block transition-all duration-500 ease-in-out after:h-0.5 after:bg-white after:absolute after:left-0 after:right-0 after:-bottom-1 after:opacity-0 after:scale-x-0 after:transition-all after:duration-[250] after:ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] after:hover:opacity-100 after:hover:scale-x-100" for="no">About</label>
 </div>
-<div class="mt-6 relative rounded-3xl lg:px-4">
-    <div
-        role="tabpanel"
-        id="panel-1"
-        class="tab-panel flex flex-col gap-y-12 transition duration-300 relative overflow-x-hidden px-4">
-        <div class="flex gap-10 mt-4 flex-wrap">
-            @if (_accounts is not null)
-            {
-                foreach (var account in _accounts)
-                {
-                    <Account
-                        AccountType="@account.Type"
-                        Currency="@account.Currency"
-                        Balance="@account.Balance"
-                        AccountNum="@account.AccountNumber"/>
-                }
-            }
-        </div>
 
-        <div>
-            <div class="flex items-center gap-4">
-                <h1 class="text-2xl">Karty</h1><span class="text-skin-base2">(@_cardCount / 3)</span>
-            </div>
-            <div class="w-screen md:w-auto shrink-0 flex items-center overflow-x-auto snap-mandatory snap-x scroll-smooth gap-4 md:gap-8 px-2 lg:px-0">
-                @if (_cards is not null)
-                {
-                    @foreach (var card in _cards.Select((card, index) => new { Card = card, Index = index }))
+<ul class="w-full flex justify-center relative px-5">
+    <li class="absolute top-0 left-0 bottom-0 right-0">
+        <input class="peer sr-only" type="radio" value="yes" name="answer" id="yes" checked/>
+        <div class="mt-2 w-full transition-all duration-500 ease-in-out translate-x-40 opacity-0 invisible peer-checked:opacity-100 peer-checked:visible peer-checked:translate-x-1">
+            <div class="flex flex-col gap-y-12 transition duration-300 relative overflow-x-hidden">
+                <div class="flex gap-10 mt-4 flex-wrap">
+                    @if (!UserData.Accounts.IsNullOrEmpty())
                     {
-                        <Card
-                            BgGradient="@_background[card.Index % _background.Length]"
-                            CardNumber="@card.Card.CardNumber"
-                            CardHolder="@card.Card.Holder"
-                            Expiration="@card.Card.Expiration"
-                            Cvv="@card.Card.CVV"
-                            State="@card.Card.State"/>
+                        foreach (var account in UserData.Accounts)
+                        {
+                            <Account
+                                AccountType="@account.Type"
+                                Currency="@account.Currency"
+                                Balance="@account.Balance"
+                                AccountNum="@account.AccountNumber"/>
+                        }
+                    }
+                </div>
+                <div>
+                    <div class="flex items-center gap-4">
+                        <h1 class="text-2xl">Karty</h1><span class="text-skin-base2">(@UserData.CardCount / 3)</span>
+                        @if (UserData.CardCount < 3)
+                        {
+                            <a class="rounded-lg flex justify-center items-center bg-skin-button_accent p-2 pr-3" href="/Cards/AddCard">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="fill-skin-base" viewBox="0 0 256 256">
+                                    <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
+                                </svg>
+                                <span>Přidat</span>
+                            </a>
+                        }
+                    </div>
+                    <div class="w-screen md:w-auto shrink-0 flex items-center overflow-x-auto snap-mandatory snap-x scroll-smooth gap-4 md:gap-8 px-2 lg:px-0">
+                        @if (!UserData.Cards.IsNullOrEmpty())
+                        {
+                            @foreach (var card in UserData.Cards.Select((card, index) => new { Card = card, Index = index }))
+                            {
+                                <Card
+                                    BgGradient="@_background[card.Index % _background.Length]"
+                                    CardNumber="@card.Card.CardNumber"
+                                    CardHolder="@card.Card.Holder"
+                                    Expiration="@card.Card.Expiration"
+                                    Cvv="@card.Card.CVV"
+                                    State="@card.Card.State"/>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+
+    <li class="absolute top-0 right-0 bottom-0 left-0">
+        <input class="peer sr-only" type="radio" value="no" name="answer" id="no"/>
+        <div class="mt-2 w-fit transition-all duration-500 ease-in-out translate-x-40 opacity-0 invisible peer-checked:opacity-100 peer-checked:visible peer-checked:translate-x-1">
+            <table class="w-full hidden md:block">
+                <thead class="bg-skin-muted border-b-2 border-gray-200">
+                <tr>
+                    <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Datum</th>
+                    <th class="w-32 p-3 text-sm font-semibold tracking-wide text-left">Částka</th>
+                    <th class="p-3 text-sm font-semibold tracking-wide text-left">Zpráva</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                @if (!UserData.Movements.IsNullOrEmpty())
+                {
+                    foreach (var movement in UserData.Movements)
+                    {
+                        <tr>
+                            <td class="p-3 text-sm whitespace-nowrap">@movement.SentAt.ToString("dd/MM/yyyy")</td>
+                            @if (movement.AccountNumberFrom == UserData.MyAccountNumber)
+                            {
+                                <td class="p-3 text-sm whitespace-nowrap text-red-500">@($"{movement.Amount:F2}") Kč</td>
+                            }
+                            else
+                            {
+                                <td class="p-3 text-sm whitespace-nowrap text-green-500">@($"{movement.Amount:F2}") Kč</td>
+                            }
+                            <td class="p-3 text-sm whitespace-nowrap">@movement.Message</td>
+                        </tr>
                     }
                 }
-                @if (_cardCount < 3)
+                </tbody>
+            </table>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+                @if (!UserData.Movements.IsNullOrEmpty())
                 {
-                    <button class="w-32 aspect-square shrink-0 snap-center rounded-xl flex justify-center items-center bg-skin-button_accent" @onclick="AddCard">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="fill-skin-base" viewBox="0 0 256 256">
-                            <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
-                        </svg>
-                    </button>
+                    @foreach (var movement in UserData.Movements)
+                    {
+                        <div class="space-y-3 p-4 rounded-lg shadow">
+                            <div class="flex items-center space-x-2 text-sm">
+                                <div class="">@movement.SentAt.ToString("dd/MM/yyyy")</div>
+                            </div>
+                            @if (movement.AccountNumberFrom == UserData.MyAccountNumber)
+                            {
+                                <div class="text-sm font-medium text-red-500">
+                                    @($"{movement.Amount:F2}") Kč
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="text-sm font-medium text-green-500">
+                                    @($"{movement.Amount:F2}") Kč
+                                </div>
+                            }
+                            <div class="text-sm">
+                                @movement.Message
+                            </div>
+                        </div>
+                    }
                 }
             </div>
         </div>
-    </div>
-
-    <div
-        role="tabpanel"
-        id="panel-2"
-        class="absolute top-0 invisible opacity-0 tab-panel p-6 transition duration-300">
-        <div>
-            <div class="text-lg">Čekající platby</div>
-            <div class="ml-1 mt-4">
-                <div class="overflow-auto rounded-lg shadow hidden md:block">
-                    <table class="w-full">
-                        <thead class="bg-skin-muted border-b-2 border-gray-200">
-                        <tr>
-                            <th class="w-20 p-3 text-sm font-semibold tracking-wide text-left">No.</th>
-                            <th class="p-3 text-sm font-semibold tracking-wide text-left">Details</th>
-                            <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Date</th>
-                            <th class="w-32 p-3 text-sm font-semibold tracking-wide text-left">Total</th>
-                        </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100">
-                        <tr class="">
-                            <td class="p-3 text-sm whitespace-nowrap">
-                                <a href="#" class="font-bold text-blue-500 hover:underline">10001</a>
-                            </td>
-                            <td class="p-3 text-sm whitespace-nowrap">
-                                something
-                            </td>
-
-                            <td class="p-3 text-sm whitespace-nowrap">16/10/2021</td>
-                            <td class="p-3 text-sm whitespace-nowrap">$200.00</td>
-                        </tr>
-                        <tr class="">
-                            <td class="p-3 text-sm whitespace-nowrap">
-                                <a href="#" class="font-bold text-blue-500 hover:underline">10002</a>
-                            </td>
-                            <td class="p-3 text-sm whitespace-nowrap">something</td>
-
-                            <td class="p-3 text-sm whitespace-nowrap">16/10/2021</td>
-                            <td class="p-3 text-sm whitespace-nowrap">$200.00</td>
-                        </tr>
-                        <tr class="">
-                            <td class="p-3 text-sm whitespace-nowrap">
-                                <a href="#" class="font-bold text-blue-500 hover:underline">10002</a>
-                            </td>
-                            <td class="p-3 text-sm whitespace-nowrap">something</td>
-                            <td class="p-3 text-sm whitespace-nowrap">16/10/2021</td>
-                            <td class="p-3 text-sm whitespace-nowrap">$200.00</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
-                    <div class="space-y-3 p-4 rounded-lg shadow">
-                        <div class="flex items-center space-x-2 text-sm">
-                            <div>
-                                <a href="#" class="text-blue-500 font-bold hover:underline">#1000</a>
-                            </div>
-                            <div class="">10/10/2021</div>
-                        </div>
-                        <div class="text-sm">
-                            something
-                        </div>
-                        <div class="text-sm font-medium">
-                            $200.00
-                        </div>
-                    </div>
-                    <div class="space-y-3 p-4 rounded-lg shadow">
-                        <div class="flex items-center space-x-2 text-sm">
-                            <div>
-                                <a href="#" class="text-blue-500 font-bold hover:underline">#1001</a>
-                            </div>
-                            <div class="">10/10/2021</div>
-                        </div>
-                        <div class="text-sm">
-                            something
-                        </div>
-                        <div class="text-sm font-medium">
-                            $200.00
-                        </div>
-                    </div>
-                    <div class="space-y-3 p-4 rounded-lg shadow">
-                        <div class="flex items-center space-x-2 text-sm">
-                            <div>
-                                <a href="#" class="text-blue-500 font-bold hover:underline">#1002</a>
-                            </div>
-                            <div class="">10/10/2021</div>
-
-                        </div>
-                        <div class="text-sm">
-                            something
-                        </div>
-                        <div class="text-sm font-medium">
-                            $200.00
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div
-        role="tabpanel"
-        id="panel-3"
-        class="absolute top-0 invisible opacity-0 tab-panel p-6 transition duration-300">
-        <h2 class="text-xl font-semibold text-gray-800">Third tab panel</h2>
-        <p class="mt-4 text-gray-600">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas dolores voluptate temporibus, atque ab eos, delectus at ad hic voluptatem veritatis iure, nulla voluptates quod nobis doloremque eaque! Perferendis, soluta.</p>
-    </div>
-</div>
+    </li>
+</ul>
 
 @code {
-    private bool _isJavaScriptInitialized;
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender && !_isJavaScriptInitialized)
-        {
-            _isJavaScriptInitialized = true;
-
-            await JsRuntime.InvokeVoidAsync("initializeTabs");
-        }
-    }
-
-    private void AddCard()
-    {
-        NavigationManager.NavigateTo("/Cards/AddCard");
-    }
 
     private readonly string[] _background =
     {
@@ -224,26 +135,12 @@
         "background: linear-gradient(to right, #0Eb9bb, #F1322D)",
         "background: linear-gradient(to right, #FB7BA2, #FCE043)"
     };
-    
-    private int _cardCount;
 
-    private ApplicationUser _user = default!;
-    private List<Domain.Entities.Account>? _accounts;
-    private List<Domain.Entities.Card>? _cards;
+    private AccountService.UserData UserData { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
-        _user = await UserAccessor.GetRequiredUserAsync();
-
-        _accounts = await Context.Accounts
-            .Where(c => c.UserId == _user.Id)
-            .ToListAsync();
-
-        _cards = await Context.Cards
-            .Where(c => c.UserId == _user.Id)
-            .ToListAsync();
-
-        _cardCount = _cards.Count;
+        UserData = await AccountService.GetUserDataAsync();
     }
 
 }

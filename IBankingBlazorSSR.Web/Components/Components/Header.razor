@@ -3,10 +3,15 @@
 @using IBankingBlazorSSR.Infrastructure.Identity
 @using IBankingBlazorSSR.Domain
 @using IBankingBlazorSSR.Domain.Entities
+@using IBankingBlazorSSR.Application.Implementation
+@using IBankingBlazorSSR.Application.Abstraction
+@using Microsoft.AspNetCore.Antiforgery
+@using Microsoft.AspNetCore.Antiforgery;
+@attribute [RequireAntiforgeryToken]
 
 @inject SignInManager<ApplicationUser> SignInManager
-@inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
+@inject IIdentityService IdentityService
 
 <header class="sticky top-0 z-20 h-16 w-full bg-skin-fill">
     <nav class="flex items-center justify-end md:px-6 px-2 h-full py-2">
@@ -20,7 +25,7 @@
             @*     </div> *@
             @* </li> *@
             <li>
-                <a href="/Settings" class="flex items-center gap-4 font-semibold lg:hidden">
+                <a href="/Settings" class="flex items-center gap-4 font-semibold lg:hidden button hover:bg-white/20">
                     <svg class="fill-skin-base" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 256 256">
                         <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm109.94-52.79a8,8,0,0,0-3.89-5.4l-29.83-17-.12-33.62a8,8,0,0,0-2.83-6.08,111.91,111.91,0,0,0-36.72-20.67,8,8,0,0,0-6.46.59L128,41.85,97.88,25a8,8,0,0,0-6.47-.6A112.1,112.1,0,0,0,54.73,45.15a8,8,0,0,0-2.83,6.07l-.15,33.65-29.83,17a8,8,0,0,0-3.89,5.4,106.47,106.47,0,0,0,0,41.56,8,8,0,0,0,3.89,5.4l29.83,17,.12,33.62a8,8,0,0,0,2.83,6.08,111.91,111.91,0,0,0,36.72,20.67,8,8,0,0,0,6.46-.59L128,214.15,158.12,231a7.91,7.91,0,0,0,3.9,1,8.09,8.09,0,0,0,2.57-.42,112.1,112.1,0,0,0,36.68-20.73,8,8,0,0,0,2.83-6.07l.15-33.65,29.83-17a8,8,0,0,0,3.89-5.4A106.47,106.47,0,0,0,237.94,107.21Zm-15,34.91-28.57,16.25a8,8,0,0,0-3,3c-.58,1-1.19,2.06-1.81,3.06a7.94,7.94,0,0,0-1.22,4.21l-.15,32.25a95.89,95.89,0,0,1-25.37,14.3L134,199.13a8,8,0,0,0-3.91-1h-.19c-1.21,0-2.43,0-3.64,0a8.08,8.08,0,0,0-4.1,1l-28.84,16.1A96,96,0,0,1,67.88,201l-.11-32.2a8,8,0,0,0-1.22-4.22c-.62-1-1.23-2-1.8-3.06a8.09,8.09,0,0,0-3-3.06l-28.6-16.29a90.49,90.49,0,0,1,0-28.26L61.67,97.63a8,8,0,0,0,3-3c.58-1,1.19-2.06,1.81-3.06a7.94,7.94,0,0,0,1.22-4.21l.15-32.25a95.89,95.89,0,0,1,25.37-14.3L122,56.87a8,8,0,0,0,4.1,1c1.21,0,2.43,0,3.64,0a8.08,8.08,0,0,0,4.1-1l28.84-16.1A96,96,0,0,1,188.12,55l.11,32.2a8,8,0,0,0,1.22,4.22c.62,1,1.23,2,1.8,3.06a8.09,8.09,0,0,0,3,3.06l28.6,16.29A90.49,90.49,0,0,1,222.9,142.12Z"></path>
                     </svg>
@@ -28,7 +33,7 @@
                 </a>
             </li>
             <li>
-                <button class="button flex items-center gap-4 font-semibold">
+                <button class="button flex items-center gap-4 font-semibold button hover:bg-white/20">
                     <svg class="fill-skin-base" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
                         <path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"></path>
                     </svg>
@@ -36,22 +41,22 @@
                 </button>
             </li>
             <li>
-                <form @onsubmit="LogoutUser" @formname="logout" method="post" class="block flex items-center gap-4 font-semibold text-red-500 hover:bg-red-500/20 focus:bg-red-400/20 rounded-lg">
-                    <AntiforgeryToken/>
+                <form @onsubmit="@LogoutUser" @formname="logout" method="post" class="block flex items-center gap-4 font-semibold text-red-500 hover:bg-red-500/20 focus:bg-red-400/20 rounded-lg">
                     <button type="submit" class="button flex items-center gap-4">
                         <svg class="fill-red-500" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256">
                             <path d="M112,216a8,8,0,0,1-8,8H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h56a8,8,0,0,1,0,16H48V208h56A8,8,0,0,1,112,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L196.69,120H104a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,221.66,122.34Z"></path>
                         </svg>
                         <span class="hidden md:block">Odhlásit</span>
                     </button>
+                    <AntiforgeryToken/>
                 </form>
             </li>
         </ul>
     </nav>
-    <div class="fixed bottom-0 left-0 right-0 flex justify-around bg-skin-fill p-2 lg:hidden border-t border-px border-black">
+    <div class="fixed bottom-0 left-0 right-0 flex justify-around bg-skin-fill p-2 lg:hidden border-t border-px border-skin-inverted">
         @foreach (var link in _menuLinks)
         {
-            <a href="@link.Link" class="flex-grow flex flex-col justify-center items-center gap-1 @(currentPath == link.Link ? "text-skin-accent" : "text-skin-base2")">
+            <a href="@link.Link" class="flex-grow flex flex-col justify-center items-center gap-1 @(_currentPath == link.Link ? "text-skin-accent" : "text-skin-base2")">
                 @link.Svg
                 <span class="text-xs">@link.Text</span>
             </a>
@@ -59,10 +64,8 @@
     </div>
 </header>
 
-<div>@_errormessage</div>
-
 @code {
-    private string? currentPath;
+    private string? _currentPath;
 
     protected override void OnInitialized()
     {
@@ -73,7 +76,7 @@
     private void UpdateCurrentPathname()
     {
         var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-        currentPath = "/" + uri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
+        _currentPath = "/" + uri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
     }
 
     private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -99,7 +102,6 @@
     };
 
     private bool _menuVisible = false;
-    private string? _errormessage;
     private string MenuVisibleClass => _menuVisible ? "translate-x-0" : "translate-x-full";
 
     private void ToggleMenu()
@@ -111,19 +113,9 @@
 
     private async Task LogoutUser()
     {
-        var user = HttpContext.User;
-        _errormessage = user.Identity?.Name ?? "Anonymous";
+        var logoutSuccess = await IdentityService.LogoutUserAsync(HttpContext);
 
-        if (SignInManager.IsSignedIn(user))
-        {
-            _errormessage = "You have";
-            await SignInManager.SignOutAsync();
-            NavigationManager.NavigateTo("/Identity/Login");
-        }
-        else
-        {
-            _errormessage = "User is not signed in";
-        }
+        NavigationManager.NavigateTo(logoutSuccess ? "/Identity/Login" : "/Identity/InvalidUser");
     }
 
 }

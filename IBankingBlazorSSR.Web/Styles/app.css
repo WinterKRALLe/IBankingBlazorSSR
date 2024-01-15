@@ -96,30 +96,22 @@
     ::-webkit-scrollbar-thumb:hover {
         background: #181818;
     }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
 }
 
 .button {
     @apply rounded-lg px-3 py-2 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-skin-button_accent;
 }
 
-.gradient1 {
-    background: linear-gradient(to left, #ea8d8d, #a890fe);
-}
-
-.gradient2 {
-    background: linear-gradient(to right, #0Eb9bb, #F1322D);
-}
-
-.rounded-custom {
-    border-radius: 0% 100% 0% 100% / 0% 0% 100% 100%;
-}
-
-.radial {
-    background-image: radial-gradient(at 8% 85%, hsla(110, 97%, 72%, 1) 0px, transparent 50%),
-    radial-gradient(at 70% 7%, hsla(25, 68%, 70%, 1) 0px, transparent 50%),
-    radial-gradient(at 1% 25%, hsla(155, 60%, 73%, 1) 0px, transparent 50%),
-    radial-gradient(at 85% 52%, hsla(269, 63%, 61%, 1) 0px, transparent 50%),
-    radial-gradient(at 86% 32%, hsla(212, 70%, 65%, 1) 0px, transparent 50%),
-    radial-gradient(at 29% 6%, hsla(144, 69%, 72%, 1) 0px, transparent 50%),
-    radial-gradient(at 61% 25%, hsla(111, 71%, 68%, 1) 0px, transparent 50%);
+.input {
+    @apply w-full max-w-sm bg-transparent focus:outline-none border border-solid border-[#454a61] rounded-lg px-4 py-2 text-sm;
 }
