@@ -19,6 +19,7 @@ builder.Services.AddCascadingAuthenticationState();
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IMovementService, MovementService>();
 builder.Services.AddScoped<INumberGenerator, NumberGenerator>();
 builder.Services.AddScoped<IUserService, UserService>();

@@ -4,12 +4,11 @@
 @using Microsoft.AspNetCore.Identity
 @using IBankingBlazorSSR.Application.Abstraction
 @using IBankingBlazorSSR.Application.ViewModels
-@using Microsoft.AspNetCore.Antiforgery
 @using Microsoft.AspNetCore.Authentication
 
 @inject NavigationManager NavigationManager
 
-@inject IIdentityService IdentityService
+@inject ILoginService LoginService
 
 @layout EmptyLayout
 
@@ -34,7 +33,7 @@
                 Přihlásit
             </button>
         </EditForm>
-        @_err
+        <div class="error-message">@_err</div>
         <div class="mt-4 flex gap-2 justify-center">
             <p>Jste tady nový?</p>
             <a href="/Identity/Registration" class="underline hover:no-underline text-skin-accent">Vytvořit účet</a>
@@ -63,7 +62,7 @@
     private async Task LoginUser()
     {
         _err = string.Empty;
-        var (success, errorMessage) = await IdentityService.LoginUserAsync(ViewModel.Username, ViewModel.Password);
+        var (success, errorMessage) = await LoginService.LoginUserAsync(ViewModel.Username, ViewModel.Password);
         
         if (success)
         {
